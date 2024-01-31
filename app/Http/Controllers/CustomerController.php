@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -25,14 +27,17 @@ class CustomerController extends Controller
         ]);
 
         $product = Product::find($id);
-
-        $data = Order::create([
+        Order::create([
             'product_id' => $id,
             'custName' => $request->custName,
             'contact' => $request->contact,
             'status' => 'list',
         ]);
 
+        Log::create([
+            'user_id'=> 4,
+            'activity' =>  $request->custName .' telah melakukan pemesanan paket '. $product->name
+        ]);
 
         return redirect()->route('orderSuccess');
     }

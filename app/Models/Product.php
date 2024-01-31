@@ -13,4 +13,8 @@ class Product extends Model
     function transaction() {
         return $this->hasMany(Order::class);
     }
+
+    function order() {
+        return $this->hasMany(Order::class);
+    }
 }

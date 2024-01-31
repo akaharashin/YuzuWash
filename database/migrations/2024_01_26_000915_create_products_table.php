@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('desc');
-            $table->string('serv1');
-            $table->string('serv2');
-            $table->string('serv3');
+            $table->string('services');
             $table->integer('price');
             $table->integer('estimate');
             $table->timestamps();

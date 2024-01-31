@@ -41,7 +41,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    function log() {
-        return $this->belongsTo(Log::class);
+    function order() {
+        return $this->hasMany(Order::class);
     }
+
+    function log() {
+        return $this->hasMany(Log::class);
+    }
+
 }

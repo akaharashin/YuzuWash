@@ -17,4 +17,8 @@ class Order extends Model
     function transaction() {
         return $this->hasMany(Transaction::class);
     }
+
+    function user() {
+        return $this->belongsTo(User::class);
+    }
 }

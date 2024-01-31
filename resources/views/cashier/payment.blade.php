@@ -8,7 +8,8 @@
             <div class="card p-4 shadow-sm">
                 <h3>Form Transaksi</h3>
                 <div class="card-body">
-                    <form action="{{ route('payment', $order->id) }}" method="POST" class="d-flex flex-column">
+                    <form action="{{ route('payment', $order->id) }}" method="POST" class="d-flex flex-column"
+                        id="transactionForm">
                         @csrf
                         <label class="form-label"> Nama Pelanggan
                             <input type="text" class="form-control" name="custName" required
@@ -27,17 +28,31 @@
                                 value="{{ $order->product->price }}">
                         </label>
                         <label class="form-label"> Uang Pembeli
-                            <input type="text" class="form-control" name="cash" required
-                                placeholder="Masukan uang pembayaran">
+                            <input type="number" class="form-control" name="cash" required
+                                placeholder="Masukan uang pembayaran" id="cashInput">
                         </label>
-                        @error('cash')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                        <span id="invalidCash" class="text-danger d-none">Uang yang dimasukan tidak cukup untuk membeli paket tersebut.</span>
 
-                        <button type="submit" class="btn btn-warning mt-4">Simpan</button>
+                        <button type="button" class="btn btn-warning mt-4" onclick="validateTransaction()">Simpan</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function validateTransaction() {
+            var price = document.getElementById('transactionForm').elements['price'].value;
+            var cash = document.getElementById('cashInput').value;
+
+            var invalidCash = document.getElementById('invalidCash');
+            
+            if (cash < price) {
+                invalidCash.classList.remove('d-none');
+            } else {
+                invalidCash.classList.add('d-none');
+                document.getElementById('transactionForm').submit();
+            }
+        }
+    </script>
 @endsection

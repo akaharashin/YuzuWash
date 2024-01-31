@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-primary px-5 shadow">
-    <a href="/" class="navbar-brand">Yuzu Wash</a>
+<nav class="navbar navbar-expand-lg px-5 shadow">
+    <a href="/" class="navbar-brand"><img src="images/yuzuWash.png" style="width: 3em" alt="">YuzuWash</a>
     <div class="container-fluid d-flex justify-content-end">
         <ul class="navbar-nav">
             @guest

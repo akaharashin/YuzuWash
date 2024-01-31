@@ -3,7 +3,7 @@
 @section('title', 'Admin')
     
 @section('body')
-    <div class="row mt-5 pt-5">
+    <div class="row mt-5 pt-5 vh-100">
         <div class="col-10 mx-auto">
             <a href="{{ route('addCashierPage') }}" class="btn btn-success mb-4">Tambah Kasir</a>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,14 +24,20 @@ class AdminController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'desc' => 'required',
-            'serv1' => 'required',
-            'serv2' => 'required',
-            'serv3' => 'required',
+            'services' => 'required',
             'estimate' => 'required',
         ]);;
+
         Product::create($data);
+
+        $package = $request->name;
+
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'activity' => ' telah menambahkan paket ' . $package
+        ]);
 
         return redirect()->route('admin');
     }
@@ -47,29 +54,37 @@ class AdminController extends Controller
             'name' => 'nullable',
             'price' => 'nullable',
             'desc' => 'nullable',
-            'serv1' => 'nullable',
-            'serv2' => 'nullable',
-            'serv3' => 'nullable',
+            'services' => 'nullable',
             'estimate' => 'nullable',
-        ]);;
-        
+        ]);
+
         $product->fill([
             'name' => $request->name,
             'price' => $request->price,
             'desc' => $request->desc,
-            'serv1' => $request->serv1,
-            'serv2' => $request->serv2,
-            'serv3' => $request->serv3,
+            'services' => $request->services,
             'estimate' => $request->estimate,
         ]);
-        
+
         $product->save();
+
+        $package = $product->name;
+
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'activity' => ' telah memperbarui paket ' . $package
+        ]);
 
         return redirect()->route('admin');
     }
 
-    function delete(Product $product) {
+    function delete(Product $product)
+    {
         $product->delete();
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'activity' => ' telah menghapus paket ' . $product->name
+        ]);
         return redirect()->route('admin');
     }
 
@@ -79,8 +94,14 @@ class AdminController extends Controller
         return view('admin.manage-cashier', compact('cashiers'));
     }
 
-    function deleteCashier(User $user) {
-        $user->delete();
+    function deleteCashier($id)
+    {
+        $user = User::find($id);
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'activity' => ' telah menghapus kasir ' . $user->name
+        ]);
+        $user->delete($id);
         return redirect()->route('manageCashier');
     }
 
@@ -92,7 +113,7 @@ class AdminController extends Controller
     function addCashier(Request $request)
     {
         $request->validate([
-            'username' => 'required',
+            'username' => 'required|unique:users',
             'password' => 'required',
             'name' => 'required',
         ]);
@@ -104,6 +125,11 @@ class AdminController extends Controller
             'role' => 'cashier',
         ]);
 
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'activity' => ' telah menambahkan kasir ' . $request->username
+        ]);
+
         return redirect()->route('manageCashier');
     }
 
@@ -112,22 +138,29 @@ class AdminController extends Controller
         $cashier = User::find($id);
         return view('admin.edit-cashier', compact('cashier'));
     }
-    
-    function updateCashier(Request $request, User $user)
+
+    function updateCashier(Request $request, $id)
     {
+        $user = User::find($id);
         $request->validate([
             'username' => 'nullable',
             'password' => 'nullable',
             'name' => 'nullable',
         ]);;
-        
+
         $user->fill([
             'username' => $request->username,
             'password' => $request->password,
             'name' => $request->name,
+            'role' => 'cashier',
         ]);
-        
+
         $user->save();
+
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'activity' => ' telah memperbarui kasir ' . $request->username
+        ]);
 
         return redirect()->route('manageCashier');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Order;
 use App\Models\OrderList;
 use App\Models\Transaction;
@@ -30,6 +31,13 @@ class TransactionController extends Controller
             'change' => $request->cash - $order->product->price,
         ]);
 
+        $uniqcode = $data->uniqcode;
+
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'activity' => ' telah melakukan pembayaran paket '. $order->product->name . ' dengan kode ' . $uniqcode
+        ]);
+
         $order->status = 'paid';
         $order->save();
 
@@ -44,7 +52,41 @@ class TransactionController extends Controller
 
     function paymentHistory()
     {
-        $transactions = Transaction::paginate(10);
+        $transactions = Transaction::paginate(8);
         return view('cashier.payment-history', compact('transactions'));
+    }
+
+    function report()
+    {
+        $transactions = Transaction::paginate(8);
+        return view('owner.report', compact('transactions'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $transactions = Transaction::where(function ($query) use ($search) {
+            $query->whereHas('order', function ($subQuery) use ($search) {
+                $subQuery->where('custName', 'LIKE', "%$search%")
+                         ->orWhere('contact', 'LIKE', "%$search%");
+            })
+            ->orWhere('cash', 'LIKE', "%$search%")
+            ->orWhere('change', 'LIKE', "%$search%")
+            ->orWhere('uniqcode', 'LIKE', "%$search%");
+        })->paginate(10);
+
+        return view('owner.report', compact('transactions'));
+    }
+
+    function log() {
+        $logs = Log::all();
+        return view('log', compact('logs'));
+    }
+
+    function income() {
+        $transactions = Transaction::all();
+        $totalIncome = $transactions->sum('cash');
+        return view('owner.income', compact('transactions', 'totalIncome'));
     }
 }

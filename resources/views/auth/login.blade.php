@@ -10,10 +10,10 @@
                     <form action="{{ route('login') }}" method="POST" class="d-flex flex-column">
                         @csrf
                         <label class="form-label text-center pb-2"> Username
-                            <input type="text" name="username" class="form-control" placeholder="Username" required>
+                            <input type="text" name="username" class="form-control" placeholder="Masukan username" required>
                         </label>
                         <label class="form-label text-center pb-4"> Password
-                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                            <input type="password" name="password" class="form-control" placeholder="Masukan password" required>
                         </label>
 
                         <button type="submit" class="btn btn-warning">Login</button>

@@ -19,13 +19,14 @@
             text-indent: 4px
         }
     </style>
-    <div class="row mt-5 pt-5">
-        <div class="col-8 mx-auto">
-            <div class="card p-4">
+    <div class="row mt-5 pb-5 mb-5">
+        <div class="col-10 mx-auto">
+            <div class="card p-3">
                 <div class="card-body">
                     <h3 class="">History Pembayaran</h3>
-                    <table class="table mt-5 d-flex flex-column p-5">
+                    <table class="table mt-5 d-flex flex-column">
                         <tr>
+                            <th>No </th>
                             <th>Nama Pelanggan</th>
                             <th>Kontak Pelanggan</th>
                             <th>Uang Dibayar</th>
@@ -36,6 +37,7 @@
                         </tr>
                         @forelse ($transactions as $transaction)
                             <tr>
+                                <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $transaction->order->custName }}</td>
                                 <td>{{ $transaction->order->contact }}</td>
                                 <td>{{ $transaction->cash }}</td>
@@ -52,10 +54,10 @@
                                 <td colspan="5">Belum ada riwayat pesanan saat ini : </td>
                             </tr>
                         @endforelse
-                        {{ $transactions->links() }}
                     </table>
+                    {{ $transactions->links() }}
                     @if ($transactions->isNotEmpty())
-                        <a href="{{ route('paymentSuccess', $transaction->id) }}" class="btn btn-warning mt-5">Back</a>
+                        <a href="{{ route('paymentSuccess', $transaction->id) }}" class="btn btn-warning">Back</a>
                     @endif
                 </div>
             </div>

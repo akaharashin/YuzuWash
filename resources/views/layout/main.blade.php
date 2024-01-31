@@ -9,9 +9,10 @@
 </head>
 <body>
     @include('layout.nav')
-    <div class="container">
+    <div class="container h-100">
         @yield('body')
     </div>
+    @include('layout.footer')
 
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 </body>
