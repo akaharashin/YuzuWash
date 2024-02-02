@@ -24,6 +24,9 @@
             <div class="card p-3">
                 <div class="card-body">
                     <h3 class="">History Pembayaran</h3>
+                    <a href="javascript:void(0);" onclick="printInvoice()" class="btn btn-secondary mt-3">
+                        Print satu halaman
+                    </a>
                     <table class="table mt-5 d-flex flex-column">
                         <tr>
                             <th>No </th>
@@ -33,7 +36,6 @@
                             <th>Kembalian</th>
                             <th>Kode Pemesanan</th>
                             <th>Tanggal</th>
-                            <th>Cetak Invoice</th>
                         </tr>
                         @forelse ($transactions as $transaction)
                             <tr>
@@ -44,10 +46,6 @@
                                 <td>Rp{{ $transaction->change }}</td>
                                 <td>{{ $transaction->uniqcode }}</td>
                                 <td>{{ $transaction->created_at }}</td>
-                                <td>
-                                    <a href="{{ route('paymentPage', $transaction->id) }}" class="btn btn-warning">
-                                        Print</a>
-                                </td>
                             </tr>
                         @empty
                             <tr>
@@ -57,10 +55,43 @@
                     </table>
                     {{ $transactions->links() }}
                     @if ($transactions->isNotEmpty())
-                        <a href="{{ route('paymentSuccess', $transaction->id) }}" class="btn btn-warning">Back</a>
+                        <a href="{{ route('paymentSuccess', $transactions[0]->id) }}" class="btn btn-success">Kembali</a>
                     @endif
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+<script>
+    function printInvoice(url) {
+        // Sembunyikan tombol cetak sebelum mencetak
+        document.querySelectorAll('.btn-warning').forEach(function(btn) {
+            btn.style.display = 'none';
+        });
+
+        // Membuat salinan elemen tabel yang ingin dicetak
+        var printContent = document.querySelector('table').cloneNode(true);
+
+        // Membuat halaman baru untuk mencetak
+        var printWindow = window.open('', '_blank');
+        printWindow.document.open();
+
+        // Menambahkan elemen tabel yang telah disalin ke   halaman baru
+        printWindow.document.write('<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: "Arial", sans-serif; font-size: 12pt;}}</style></head><body>');
+        printWindow.document.write(printContent.outerHTML);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+        // Mencetak halaman baru
+        printWindow.print();
+        printWindow.onafterprint = function () {
+            printWindow.close();
+            
+            // Tampilkan kembali tombol cetak setelah mencetak selesai
+            document.querySelectorAll('.btn-warning').forEach(function(btn) {
+                btn.style.display = 'inline';
+            });
+        };
+    }
+</script>

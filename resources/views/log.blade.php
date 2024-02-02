@@ -24,9 +24,9 @@
                     @endforeach
                 </tbody>
             </table>
-
+            <a href="{{ route('report') }}" class="btn btn-success">Kembali</a>
             @if (auth()->user()->id == 3)
-                <a href="" onclick="clearLog()" class="btn btn-danger">Clear Log</a>
+                <a href="" onclick="clearLog()" class="btn btn-danger ms-2">Clear Log</a>
             @endif
         </div>
     </div>

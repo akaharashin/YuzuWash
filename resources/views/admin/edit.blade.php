@@ -25,7 +25,7 @@
                         <label class="form-label"> Estimate
                             <input type="text" class="form-control" name="estimate" required value="{{ $product->estimate }}">
                         </label>
-                        <button type="submit" class="btn btn-warning mt-4">Simpan Perubahan</button>
+                        <button type="submit" class="btn btn-success mt-4">Simpan Perubahan</button>
                     </form>
                 </div>
             </div>

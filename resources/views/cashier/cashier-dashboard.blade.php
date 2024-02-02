@@ -5,10 +5,13 @@
 @section('body')
     <div class="row pt-5 pb-5 mb-5">
         <div class="col-8 mx-auto">
-            <h2 class="mb-4">Dashboard Kasir</h2>
-            <h6>Berikut ini adalah pesanan-pesanan yang baru di pesan cutomer</h6>
+            <h2 class="mb-4">Daftar Pesanan</h2>
+            @if (Session::has('message'))
+                <span class="alert-success alert mb-5">{{ Session::get('message') }}</span>
+            @endif
+            <h6 class="pt-4">Berikut ini adalah pesanan-pesanan yang baru di pesan customer</h6>
             <p>Klik Konfirmasi order untuk melanjutkan ke pembayaran</p>
-            <table class="table mt-">
+            <table class="table mt-3">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -30,7 +33,7 @@
                             <td>Rp{{ $order->product->price }}</td>
                             <td>{{ $order->created_at }}</td>
                             <td>
-                                <a href="{{ route('paymentPage', $order->id) }}" class="btn btn-warning">Konfirmasi Order</a>
+                                <a href="{{ route('paymentPage', $order->id) }}" class="btn btn-success shadow-sm">Konfirmasi Order</a>
                             </td>
                         </tr>
                     @empty

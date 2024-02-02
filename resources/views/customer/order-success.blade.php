@@ -3,7 +3,7 @@
 @section('title', 'Invoice')
     
 @section('body')
-    <div class="row mt-5 pt-5">
+    <div class="row mt-5 pt-5 vh-100">
         <div class="col-8 mx-auto">
             <div class="card">
                 <div class="card-body">

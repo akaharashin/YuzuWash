@@ -84,9 +84,21 @@ class TransactionController extends Controller
         return view('log', compact('logs'));
     }
 
-    function income() {
-        $transactions = Transaction::all();
+    function income(Request $request) {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+    
+        $transactions = Transaction::query();
+    
+        if ($startDate && $endDate) {
+            // Jika kedua tanggal disediakan, filter berdasarkan rentang tanggal
+            $transactions->whereBetween('created_at', [$startDate, $endDate]);
+        }
+    
+        $transactions = $transactions->get();
         $totalIncome = $transactions->sum('cash');
+    
         return view('owner.income', compact('transactions', 'totalIncome'));
     }
+    
 }

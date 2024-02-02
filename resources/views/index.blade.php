@@ -13,7 +13,7 @@
                 <div class="texts">
                     <h2 class="pt-5 mt-5 px-3">Jangan Ragu, Buktikan Sendiri Kualitas YuzuWash Dengan Layanan Satu Kali Cuci
                     </h2>
-                    <p class="px-5  mt-5 fs-5">Pesan - Datang - Bersih</p>
+                    <p class="px-5  mt-5 fs-5">	&#10004; Pesan &nbsp;&#10004; Datang &nbsp; &#10004;Bersih</p>
                 </div>
             </div>
         </div>
@@ -31,15 +31,15 @@
 
                             <ul class="list-group mt-4">
                                 @foreach (explode(',', $product->services) as $service)
-                                    <li class="list-group-item">{{ trim($service) }}</li>
+                                    <li class="list-group-item">&#128505; {{ trim($service) }}</li>
                                 @endforeach
                             </ul>
                             <label for="" class="d-block mt-4 opacity-75">Harga</label>
                             <span
                                 class="card-text d-block fw-bold pb-2">Rp{{ number_format($product->price, 0, ',', '.') }}</span>
-                            <span class="border p-1 rounded-pill bg-info w-50 text-center mb-2">Estimasi
+                            <span class="border p-1 rounded-pill w-50 text-center mb-2 fw-medium" style="font-size: 0.9em; background-color: #16C60C">&#x1F551; Estimasi
                                 {{ $product->estimate }} jam</span>
-                            <a href="{{ route('orderForm', $product->id) }}" class="btn btn-warning mt-3">Pesan</a>
+                            <a href="{{ route('orderForm', $product->id) }}" class="btn btn-primary mt-3">Pesan</a>
                         </div>
                     </div>
                 </div>

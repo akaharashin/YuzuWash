@@ -33,7 +33,7 @@
                         </label>
                         <span id="invalidCash" class="text-danger d-none">Uang yang dimasukan tidak cukup untuk membeli paket tersebut.</span>
 
-                        <button type="button" class="btn btn-warning mt-4" onclick="validateTransaction()">Simpan</button>
+                        <button type="button" class="btn btn-success mt-4" onclick="validateTransaction()">Simpan</button>
                     </form>
                 </div>
             </div>
@@ -47,7 +47,7 @@
 
             var invalidCash = document.getElementById('invalidCash');
             
-            if (cash < price) {
+            if (isNaN(cash) || cash < price) {
                 invalidCash.classList.remove('d-none');
             } else {
                 invalidCash.classList.add('d-none');

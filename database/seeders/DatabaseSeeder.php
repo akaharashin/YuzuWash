@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'user',
             'password' => bcrypt('user'),
             'name' => 'Pengguna',
-            'role' => 'cashier',
+            'role' => 'customer',
         ]);
 
         Product::create([
@@ -130,18 +130,22 @@ class DatabaseSeeder extends Seeder
             'uniqcode' => 'INV-0p01k1',
             'cash' => 300000,
             'change' => 25000,
+            'created_at' => '2024-01-02 08:40:42'
         ]);
         Transaction::create([
             'order_id' => 2,
             'uniqcode' => 'INV-0p01k12',
             'cash' => 300000,
             'change' => 25000,
+            'created_at' => '2024-01-03 08:40:42'
         ]);
         Transaction::create([
             'order_id' => 3,
             'uniqcode' => 'INV-0p01k13',
             'cash' => 300000,
             'change' => 25000,
+            'created_at' => '2024-01-04 08:40:42'
+
         ]);
 
         Transaction::create([
@@ -149,6 +153,7 @@ class DatabaseSeeder extends Seeder
             'uniqcode' => 'INV-0p01k14',
             'cash' => 300000,
             'change' => 25000,
+            'created_at' => '2024-01-04 08:40:42'
         ]);
 
         Transaction::create([

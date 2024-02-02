@@ -39,7 +39,7 @@ class AdminController extends Controller
             'activity' => ' telah menambahkan paket ' . $package
         ]);
 
-        return redirect()->route('admin');
+        return redirect()->route('admin')->with('message', 'Paket berhasil ditambahkan');
     }
 
     function editPage($id)
@@ -75,7 +75,7 @@ class AdminController extends Controller
             'activity' => ' telah memperbarui paket ' . $package
         ]);
 
-        return redirect()->route('admin');
+        return redirect()->route('admin')->with('message', 'Paket berhasil diperbaharui');;
     }
 
     function delete(Product $product)
@@ -85,7 +85,7 @@ class AdminController extends Controller
             'user_id' => auth()->user()->id,
             'activity' => ' telah menghapus paket ' . $product->name
         ]);
-        return redirect()->route('admin');
+        return redirect()->route('admin')->with('message', 'Paket berhasil dihapus');;
     }
 
     function manageCashier()
@@ -102,7 +102,7 @@ class AdminController extends Controller
             'activity' => ' telah menghapus kasir ' . $user->name
         ]);
         $user->delete($id);
-        return redirect()->route('manageCashier');
+        return redirect()->route('manageCashier')->with('message', 'Kasir berhasil dihapus');;
     }
 
     function addCashierPage()
@@ -130,7 +130,7 @@ class AdminController extends Controller
             'activity' => ' telah menambahkan kasir ' . $request->username
         ]);
 
-        return redirect()->route('manageCashier');
+        return redirect()->route('manageCashier')->with('message', 'Kasir telah ditambahkan');;
     }
 
     function editCashier($id)
@@ -162,6 +162,6 @@ class AdminController extends Controller
             'activity' => ' telah memperbarui kasir ' . $request->username
         ]);
 
-        return redirect()->route('manageCashier');
+        return redirect()->route('manageCashier')->with('message', 'kasir telah diperbaharui');;
     }
 }
