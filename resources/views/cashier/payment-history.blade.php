@@ -78,7 +78,7 @@
         printWindow.document.open();
 
         // Menambahkan elemen tabel yang telah disalin ke   halaman baru
-        printWindow.document.write('<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: "Arial", sans-serif; font-size: 12pt;}}</style></head><body>');
+        printWindow.document.write('<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: sans-serif; font-size: 12pt;}}</style></head><body>');
         printWindow.document.write(printContent.outerHTML);
         printWindow.document.write('</body></html>');
         printWindow.document.close();

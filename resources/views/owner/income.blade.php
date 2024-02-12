@@ -3,8 +3,8 @@
 @section('title', 'Total Pemasukan')
 
 @section('body')
-    <div class="row mt-5 mb-5 pb-5">
-        <div class="col-10 mx-auto d-flex">
+<div class="row mt-5 mb-5 pb-5">
+    <div class="col-10 mx-auto d-flex">
             <div class="card w-50 h-75 p-3">
                 <h5>Fitur Pencarian Sesuai Tanggal</h5>
                 <div class="card-body">
@@ -18,7 +18,7 @@
                             <label for="end_date">Tanggal Akhir:</label>
                             <input type="date" class="form-control" name="end_date">
                         </div>
-                        <button type="submit" class="btn btn-success mt-3 d-flex">Filter</button>
+                        <button type="submit" class="btn btn-secondary mt-3 d-flex">Filter</button>
                     </form>
                 </div>
             </div>
@@ -42,4 +42,6 @@
             </table>
         </div>
     </div>
+    <a href="{{ route('report') }}" class="btn btn-success" style="margin-left: 8em">Kembali</a>
+
 @endsection

@@ -56,6 +56,8 @@ class TransactionController extends Controller
         return view('cashier.payment-history', compact('transactions'));
     }
 
+    // owner section
+
     function report()
     {
         $transactions = Transaction::paginate(8);
@@ -81,7 +83,7 @@ class TransactionController extends Controller
 
     function log() {
         $logs = Log::all();
-        return view('log', compact('logs'));
+        return view('owner.log', compact('logs'));
     }
 
     function income(Request $request) {

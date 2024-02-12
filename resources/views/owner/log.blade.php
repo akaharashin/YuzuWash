@@ -3,7 +3,7 @@
 @section('title', 'Log')
 
 @section('body')
-    <div class="row mt-5 mb-1 vh-100">
+    <div class="row mt-5 mb-1 h-100">
         <div class="col-8 mx-auto">
             <h2 class="mb-4">Log Aktifitas</h2>
             <table class="table">

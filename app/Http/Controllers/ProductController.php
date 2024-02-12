@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    // untuk menampilan product di transaksi kasir
     function cashierDashboard() {
         $orders = Order::where('status', 'list')->get();
         return view('cashier.cashier-dashboard', compact('orders'));

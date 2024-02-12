@@ -20,18 +20,19 @@
                                 placeholder="Masukan kontak pelanggan" value="{{ $order->contact }}">
                         </label>
                         <label class="form-label"> Paket Pilihan
-                            <input type="text" class="form-control" name="package" disabled required
+                            <input type="text" class="form-control" name="package" readonly required
                                 value="{{ $order->product->name }}">
                         </label>
                         <label class="form-label"> Harga Paket
-                            <input type="text" class="form-control" name="price" disabled required
+                            <input type="text" class="form-control" name="price" readonly required
                                 value="{{ $order->product->price }}">
                         </label>
                         <label class="form-label"> Uang Pembeli
                             <input type="number" class="form-control" name="cash" required
-                                placeholder="Masukan uang pembayaran" id="cashInput">
+                                placeholder="Masukan uang pembayaran" id="cashInput" min="0">
                         </label>
-                        <span id="invalidCash" class="text-danger d-none">Uang yang dimasukan tidak cukup untuk membeli paket tersebut.</span>
+                        <span id="invalidCash" class="text-danger d-none">Uang yang dimasukan tidak cukup untuk membeli
+                            paket tersebut.</span>
 
                         <button type="button" class="btn btn-success mt-4" onclick="validateTransaction()">Simpan</button>
                     </form>
@@ -42,13 +43,14 @@
 
     <script>
         function validateTransaction() {
-            var price = document.getElementById('transactionForm').elements['price'].value;
-            var cash = document.getElementById('cashInput').value;
+            var price = parseFloat(document.getElementById('transactionForm').elements['price'].value);
+            var cash = parseFloat(document.getElementById('cashInput').value);
 
             var invalidCash = document.getElementById('invalidCash');
-            
+
             if (isNaN(cash) || cash < price) {
                 invalidCash.classList.remove('d-none');
+                return false; // Tidak memungkinkan form disubmit jika validasi gagal
             } else {
                 invalidCash.classList.add('d-none');
                 document.getElementById('transactionForm').submit();

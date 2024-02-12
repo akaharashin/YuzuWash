@@ -17,5 +17,6 @@ class Authenticate extends Middleware
         if(!auth()){
             return back()->route('loginPage');
         }
+        
     }
 }
