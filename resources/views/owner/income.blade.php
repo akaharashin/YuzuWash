@@ -18,9 +18,9 @@
                             <label for="end_date">Tanggal Akhir:</label>
                             <input type="date" class="form-control" name="end_date">
                         </div>
-                        <button type="submit" class="btn btn-secondary mt-3 d-flex">Filter</button>
                     </form>
                 </div>
+                <button type="submit" class="btn btn-secondary mt-3">Filter</button>
             </div>
             <table class="table w-75">
                 <thead>

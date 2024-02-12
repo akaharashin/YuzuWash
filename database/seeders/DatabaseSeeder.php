@@ -70,125 +70,125 @@ class DatabaseSeeder extends Seeder
             'price' => 275000,
             'estimate' => 3
         ]);
-        Order::create([
-            'product_id' => 1,
-            'custName' => 'Tony Stark',
-            'contact' => '+44-2829',
-            'status' => 'list',
-        ]);
-        Order::create([
-            'product_id' => 1,
-            'custName' => 'Tony Stark',
-            'contact' => '+44-2829',
-            'status' => 'list',
-        ]);
-        Order::create([
-            'product_id' => 1,
-            'custName' => 'Tony Stark',
-            'contact' => '+44-2829',
-            'status' => 'list',
-        ]);
-        Order::create([
-            'product_id' => 1,
-            'custName' => 'Tony Stark',
-            'contact' => '+44-2829',
-            'status' => 'list',
-        ]);
-        Order::create([
-            'product_id' => 1,
-            'custName' => 'Tony Stark',
-            'contact' => '+44-2829',
-            'status' => 'list',
-        ]);
-        Order::create([
-            'product_id' => 1,
-            'custName' => 'Tony Stark',
-            'contact' => '+44-2829',
-            'status' => 'list',
-        ]);
-        Order::create([
-            'product_id' => 1,
-            'custName' => 'Tony Stark',
-            'contact' => '+44-2829',
-            'status' => 'list',
-        ]);
-        Order::create([
-            'product_id' => 1,
-            'custName' => 'Tony Stark',
-            'contact' => '+44-2829',
-            'status' => 'list',
-        ]);
-        Order::create([
-            'product_id' => 1,
-            'custName' => 'Tony Stark',
-            'contact' => '+44-2829',
-            'status' => 'list',
-        ]);
+        // Order::create([
+        //     'product_id' => 1,
+        //     'custName' => 'Tony Stark',
+        //     'contact' => '+44-2829',
+        //     'status' => 'list',
+        // ]);
+        // Order::create([
+        //     'product_id' => 1,
+        //     'custName' => 'Tony Stark',
+        //     'contact' => '+44-2829',
+        //     'status' => 'list',
+        // ]);
+        // Order::create([
+        //     'product_id' => 1,
+        //     'custName' => 'Tony Stark',
+        //     'contact' => '+44-2829',
+        //     'status' => 'list',
+        // ]);
+        // Order::create([
+        //     'product_id' => 1,
+        //     'custName' => 'Tony Stark',
+        //     'contact' => '+44-2829',
+        //     'status' => 'list',
+        // ]);
+        // Order::create([
+        //     'product_id' => 1,
+        //     'custName' => 'Tony Stark',
+        //     'contact' => '+44-2829',
+        //     'status' => 'list',
+        // ]);
+        // Order::create([
+        //     'product_id' => 1,
+        //     'custName' => 'Tony Stark',
+        //     'contact' => '+44-2829',
+        //     'status' => 'list',
+        // ]);
+        // Order::create([
+        //     'product_id' => 1,
+        //     'custName' => 'Tony Stark',
+        //     'contact' => '+44-2829',
+        //     'status' => 'list',
+        // ]);
+        // Order::create([
+        //     'product_id' => 1,
+        //     'custName' => 'Tony Stark',
+        //     'contact' => '+44-2829',
+        //     'status' => 'list',
+        // ]);
+        // Order::create([
+        //     'product_id' => 1,
+        //     'custName' => 'Tony Stark',
+        //     'contact' => '+44-2829',
+        //     'status' => 'list',
+        // ]);
 
-        Transaction::create([
-            'order_id' => 1,
-            'uniqcode' => 'INV-0p01k1',
-            'cash' => 300000,
-            'change' => 25000,
-            'created_at' => '2024-01-02 08:40:42'
-        ]);
-        Transaction::create([
-            'order_id' => 2,
-            'uniqcode' => 'INV-0p01k12',
-            'cash' => 300000,
-            'change' => 25000,
-            'created_at' => '2024-01-03 08:40:42'
-        ]);
-        Transaction::create([
-            'order_id' => 3,
-            'uniqcode' => 'INV-0p01k13',
-            'cash' => 300000,
-            'change' => 25000,
-            'created_at' => '2024-01-04 08:40:42'
+        // Transaction::create([
+        //     'order_id' => 1,
+        //     'uniqcode' => 'INV-0p01k1',
+        //     'cash' => 300000,
+        //     'change' => 25000,
+        //     'created_at' => '2024-01-02 08:40:42'
+        // ]);
+        // Transaction::create([
+        //     'order_id' => 2,
+        //     'uniqcode' => 'INV-0p01k12',
+        //     'cash' => 300000,
+        //     'change' => 25000,
+        //     'created_at' => '2024-01-03 08:40:42'
+        // ]);
+        // Transaction::create([
+        //     'order_id' => 3,
+        //     'uniqcode' => 'INV-0p01k13',
+        //     'cash' => 300000,
+        //     'change' => 25000,
+        //     'created_at' => '2024-01-04 08:40:42'
 
-        ]);
+        // ]);
 
-        Transaction::create([
-            'order_id' => 3,
-            'uniqcode' => 'INV-0p01k14',
-            'cash' => 300000,
-            'change' => 25000,
-            'created_at' => '2024-01-04 08:40:42'
-        ]);
+        // Transaction::create([
+        //     'order_id' => 3,
+        //     'uniqcode' => 'INV-0p01k14',
+        //     'cash' => 300000,
+        //     'change' => 25000,
+        //     'created_at' => '2024-01-04 08:40:42'
+        // ]);
 
-        Transaction::create([
-            'order_id' => 5,
-            'uniqcode' => 'INV-0p01k15',
-            'cash' => 300000,
-            'change' => 25000,
-        ]);
+        // Transaction::create([
+        //     'order_id' => 5,
+        //     'uniqcode' => 'INV-0p01k15',
+        //     'cash' => 300000,
+        //     'change' => 25000,
+        // ]);
 
-        Transaction::create([
-            'order_id' => 6,
-            'uniqcode' => 'INV-0p01k16',
-            'cash' => 300000,
-            'change' => 25000,
-        ]);
+        // Transaction::create([
+        //     'order_id' => 6,
+        //     'uniqcode' => 'INV-0p01k16',
+        //     'cash' => 300000,
+        //     'change' => 25000,
+        // ]);
 
-        Transaction::create([
-            'order_id' => 7,
-            'uniqcode' => 'INV-0p01k17',
-            'cash' => 300000,
-            'change' => 25000,
-        ]);
+        // Transaction::create([
+        //     'order_id' => 7,
+        //     'uniqcode' => 'INV-0p01k17',
+        //     'cash' => 300000,
+        //     'change' => 25000,
+        // ]);
 
-        Transaction::create([
-            'order_id' => 8,
-            'uniqcode' => 'INV-0p01k18',
-            'cash' => 300000,
-            'change' => 25000,
-        ]);
+        // Transaction::create([
+        //     'order_id' => 8,
+        //     'uniqcode' => 'INV-0p01k18',
+        //     'cash' => 300000,
+        //     'change' => 25000,
+        // ]);
 
-        Transaction::create([
-            'order_id' => 9,
-            'uniqcode' => 'INV-0p01k19',
-            'cash' => 300000,
-            'change' => 25000,
-        ]);
+        // Transaction::create([
+        //     'order_id' => 9,
+        //     'uniqcode' => 'INV-0p01k19',
+        //     'cash' => 300000,
+        //     'change' => 25000,
+        // ]);
     }
 }
