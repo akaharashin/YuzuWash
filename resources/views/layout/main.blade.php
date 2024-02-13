@@ -10,6 +10,9 @@
 <body>
     @include('layout.nav')
     <div class="container h-100">
+        @if (Session::has('error'))
+            <div class="alert alert-danger mt-4">{{ Session::get('error') }}</div>
+        @endif
         @yield('body')
     </div>
     @include('layout.footer')

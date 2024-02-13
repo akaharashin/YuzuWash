@@ -47,13 +47,14 @@
 
             // Membuat salinan elemen card yang ingin dicetak
             var printContent = document.querySelector('table').cloneNode(true);
+            console.log(printContent)
 
             // Membuat halaman baru untuk mencetak
             var printWindow = window.open('', '_blank');
             printWindow.document.open();
 
             // Menambahkan elemen card yang telah disalin ke halaman baru
-            printWindow.document.write('<html><head><title>Invoice Cuci Mobil</title><style>@media print {.card {width: 100%; font-family: "Arial", sans-serif; font-size: 12pt;}}</style></head><body>');
+            printWindow.document.write('<html><head><title>Invoice Cuci Mobil</title><style>@media print {.card {width: 100%; font-family: sans; font-size: 12pt;}}</style></head><body>');
             printWindow.document.write(printContent.outerHTML);
             printWindow.document.write('</body></html>');
             printWindow.document.close();

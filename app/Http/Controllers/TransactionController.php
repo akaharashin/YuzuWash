@@ -98,7 +98,9 @@ class TransactionController extends Controller
         }
     
         $transactions = $transactions->get();
-        $totalIncome = $transactions->sum('cash');
+        $totalCash = $transactions->sum('cash');
+        $totalChange = $transactions->sum('change');
+        $totalIncome = $totalCash - $totalChange;
     
         return view('owner.income', compact('transactions', 'totalIncome'));
     }

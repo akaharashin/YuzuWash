@@ -3,8 +3,23 @@
 @section('title', 'Total Pemasukan')
 
 @section('body')
-<div class="row mt-5 mb-5 pb-5">
-    <div class="col-10 mx-auto d-flex">
+    <style>
+        .chart {
+            width: 400px;
+            height: 300px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        .bar {
+            position: absolute;
+            bottom: 0;
+            width: 20px;
+            background-color: blue;
+        }
+    </style>
+    <div class="row mt-5 mb-5 pb-5">
+        <div class="col-10 mx-auto d-flex">
             <div class="card w-50 h-75 p-3">
                 <h5>Fitur Pencarian Sesuai Tanggal</h5>
                 <div class="card-body">
@@ -31,7 +46,7 @@
                     @foreach ($transactions as $transaction)
                         <tr>
                             <td>{{ $transaction->created_at }}</td>
-                            <td>Rp{{ number_format($transaction->cash, 0, ',', '.') }}</td>
+                            <td>Rp{{ number_format($transaction->order->product->price, 0, ',', '.') }}</td>
                         </tr>
                     @endforeach
                     <tr>
@@ -43,5 +58,31 @@
         </div>
     </div>
     <a href="{{ route('report') }}" class="btn btn-success" style="margin-left: 8em">Kembali</a>
+
+    {{-- <div class="chart" id="chart"></div>
+
+    <script>
+        // Data keuntungan per bulan dari controller
+        const monthlyIncome = {!! json_encode($monthlyIncome) !!};
+        // Tinggi maksimum grafik
+        const maxHeight = 300;
+        // Menghitung tinggi maksimum untuk skala yang konsisten
+        const maxIncome = Math.max(...monthlyIncome);
+        const barHeights = monthlyIncome.map(income => (income / maxIncome) * maxHeight);
+      
+        // Select chart container
+        const chartContainer = document.getElementById('chart');
+      
+        // Draw bars
+        barHeights.forEach((barHeight, index) => {
+          const bar = document.createElement('div');
+          bar.className = 'bar';
+          bar.style.height = barHeight + 'px';
+          bar.style.left = (index * 30 + 10) + 'px';
+          chartContainer.appendChild(bar);
+        });
+      </script> --}}
+
+
 
 @endsection
