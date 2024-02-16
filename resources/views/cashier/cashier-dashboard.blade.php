@@ -30,8 +30,8 @@
                             <td>{{ $order->custName }}</td>
                             <td>{{ $order->contact }}</td>
                             <td>{{ $order->product->name }}</td>
-                            <td>Rp{{ $order->product->price }}</td>
-                            <td>{{ $order->created_at }}</td>
+                            <td>Rp{{ number_format($order->product->price, 0, ',', '.') }}</td>
+                            <td>{{ $order->created_at->format('d M - Y') }}</td>
                             <td>
                                 <a href="{{ route('paymentPage', $order->id) }}" class="btn btn-success shadow-sm">Konfirmasi Order</a>
                             </td>

@@ -4,7 +4,7 @@
 
 @section('body')
     <style>
-        .chart {
+        /* .chart {
             width: 400px;
             height: 300px;
             border: 1px solid #ccc;
@@ -16,7 +16,7 @@
             bottom: 0;
             width: 20px;
             background-color: blue;
-        }
+        } */
     </style>
     <div class="row mt-5 mb-5 pb-5">
         <div class="col-10 mx-auto d-flex">
@@ -33,9 +33,9 @@
                             <label for="end_date">Tanggal Akhir:</label>
                             <input type="date" class="form-control" name="end_date">
                         </div>
+                        <button type="submit" class="btn btn-secondary mt-3">Filter</button>
                     </form>
                 </div>
-                <button type="submit" class="btn btn-secondary mt-3">Filter</button>
             </div>
             <table class="table w-75">
                 <thead>
@@ -45,7 +45,7 @@
                 <tbody>
                     @foreach ($transactions as $transaction)
                         <tr>
-                            <td>{{ $transaction->created_at }}</td>
+                            <td>{{ $transaction->created_at->format('D - d  M - Y') }}</td>
                             <td>Rp{{ number_format($transaction->order->product->price, 0, ',', '.') }}</td>
                         </tr>
                     @endforeach

@@ -24,6 +24,7 @@ class TransactionController extends Controller
         $order = Order::find($id);
         $data = Transaction::create([
             'order_id' => $id,
+            'user_id' => auth()->user()->id,
             'custName' => $request->custName,
             'contact' => $request->contact,
             'uniqcode' => 'INV-' . Str::random(10),

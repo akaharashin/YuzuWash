@@ -26,14 +26,6 @@
                             <input type="text" class="form-control" name="price" disabled required
                                 value="{{ $product->price }}">
                         </label>
-                        {{-- <label class="form-label"> Cash
-                            <input type="text" class="form-control" name="cash" required placeholder="Masukan uang pembayaran">
-                        </label> --}}
-
-                        @if (Session::has('error'))
-                            <div class="alert alert-danger">{{ Session::get('error') }}</div>
-                        @endif
-
 
                         <button type="submit" class="btn btn-warning mt-4">Simpan</button>
                     </form>

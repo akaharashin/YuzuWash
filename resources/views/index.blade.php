@@ -9,7 +9,7 @@
             <div class="col-8">
                 <img src="images/banner.jpg" alt="" height="450px" width="100%">
             </div>
-            <div class="col-4" style="background-color: #D5E5F4">
+            <div class="col-4" style="background-color: #1B8597">
                 <div class="texts">
                     <h2 class="pt-5 mt-5 px-3">Jangan Ragu, Buktikan Sendiri Kualitas YuzuWash Dengan Layanan Satu Kali Cuci
                     </h2>
@@ -37,9 +37,9 @@
                             <label for="" class="d-block mt-4 opacity-75">Harga</label>
                             <span
                                 class="card-text d-block fw-bold pb-2">Rp{{ number_format($product->price, 0, ',', '.') }}</span>
-                            <span class="border p-1 rounded-pill w-50 text-center mb-2 fw-medium" style="font-size: 0.9em; background-color: #16C60C">&#x1F551; Estimasi
+                            <span class="border p-1 rounded-pill w-50 text-center mb-2 fw-medium text-white" style="font-size: 0.9em; background-color: #1B8597">&#x1F551; Estimasi
                                 {{ $product->estimate }} jam</span>
-                            <a href="{{ route('orderForm', $product->id) }}" class="btn btn-primary mt-3">Pesan</a>
+                            <a href="{{ route('orderForm', $product->id) }}" class="btn mt-3 text-white" style="background-color:#00ABBF;">Pesan</a>
                         </div>
                     </div>
                 </div>

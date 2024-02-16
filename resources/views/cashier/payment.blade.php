@@ -13,11 +13,11 @@
                         @csrf
                         <label class="form-label"> Nama Pelanggan
                             <input type="text" class="form-control" name="custName" required
-                                placeholder="Masukan nama pelanggan" value="{{ $order->custName }}">
+                                placeholder="Masukan nama pelanggan" value="{{ $order->custName }}" readonly>
                         </label>
                         <label class="form-label"> Kontak/No.Telp
                             <input type="text" class="form-control" name="contact" required
-                                placeholder="Masukan kontak pelanggan" value="{{ $order->contact }}">
+                                placeholder="Masukan kontak pelanggan" value="{{ $order->contact }}" readonly>
                         </label>
                         <label class="form-label"> Paket Pilihan
                             <input type="text" class="form-control" name="package" readonly required

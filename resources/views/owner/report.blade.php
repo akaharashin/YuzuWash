@@ -31,7 +31,7 @@
                     <form action="{{ route('transactions.search') }}" method="GET" class="mb-3 w-75 text-center">
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Cari...">
-                            <button type="submit" class="btn btn-primary">Cari</button>
+                            <button type="submit" class="btn btn-warning">Cari</button>
                         </div>
                     </form>
                     
@@ -58,7 +58,7 @@
                                 <td>{{ number_format($transaction->cash, 0, ',', '.') }}</td>
                                 <td>Rp{{ number_format($transaction->change, 0, ',', '.') }}</td>
                                 <td>{{ $transaction->uniqcode }}</td>
-                                <td>{{ $transaction->created_at }}</td>
+                                <td>{{ $transaction->created_at->format('d M - Y') }}</td>
                             </tr>
                         @empty
                             <tr>

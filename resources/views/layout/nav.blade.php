@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg px-5 shadow" style="background-color: #4663ac">
-    <img src="images/yuzuWash.png" style="width: 5em" alt="">
+<nav class="navbar navbar-expand-lg px-5 shadow" style="background-color: #00ABBF">
+    <img src="{{ asset('images/yuzuWash.png') }}" style="width: 5em" alt="">
     <a href="/" class="navbar-brand fw-bold text-white">YuzuWash</a>
     <div class="container-fluid d-flex justify-content-end">
         <ul class="navbar-nav">

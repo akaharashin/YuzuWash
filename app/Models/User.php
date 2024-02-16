@@ -49,4 +49,8 @@ class User extends Authenticatable
         return $this->hasMany(Log::class);
     }
 
+    function transaction() {
+        return $this->belongsTo(User::class);
+    }
+
 }

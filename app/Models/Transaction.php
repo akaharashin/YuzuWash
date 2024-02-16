@@ -13,4 +13,8 @@ class Transaction extends Model
     function order() {
         return $this->belongsTo(Order::class);
     }
+
+    function user() {
+        return $this->belongsTo(User::class);
+    }
 }

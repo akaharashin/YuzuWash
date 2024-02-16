@@ -42,10 +42,10 @@
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $transaction->order->custName }}</td>
                                 <td>{{ $transaction->order->contact }}</td>
-                                <td>{{ $transaction->cash }}</td>
-                                <td>Rp{{ $transaction->change }}</td>
+                                <td>{{ number_format($transaction->cash, 0, ',' , '.') }}</td>
+                                <td>Rp{{ number_format($transaction->change, 0, ',' , '.') }}</td>
                                 <td>{{ $transaction->uniqcode }}</td>
-                                <td>{{ $transaction->created_at }}</td>
+                                <td>{{ $transaction->created_at->format('D - d M - Y') }}</td>
                             </tr>
                         @empty
                             <tr>

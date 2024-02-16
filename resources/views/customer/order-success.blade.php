@@ -5,11 +5,12 @@
 @section('body')
     <div class="row mt-5 pt-5 vh-100">
         <div class="col-8 mx-auto">
-            <div class="card">
+            <div class="card shadow-sm">
                 <div class="card-body">
-                    <h3>Pesanan cuci mobil anda berhasil, Pesanan anda akan segera diproses.</h3>
+                    <h3>Pesanan cuci mobil anda berhasil! , pesanan anda akan <br> segera diproses ...</h3>
+                    <p>Nomer anda akan segera di hubungi oleh petugas...</p>
                     <p>Hubungi Nomer ini untuk info selanjutnya: <a href="#">026-321-1</a></p>
-                    <a href="/" class="btn btn-warning mt-5">Pesan Lagi</a>
+                    <a href="/" class="btn btn-warning mt-5">Kembali</a>
                 </div>
             </div>  
         </div>
