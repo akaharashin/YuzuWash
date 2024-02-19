@@ -87,6 +87,11 @@ class TransactionController extends Controller
         return view('owner.log', compact('logs'));
     }
 
+    function clearLog(Log $log) {
+        $log->delete();
+        return redirect()->route('log')->with('message', 'Log telah dibersihkan');
+    }
+
     function income(Request $request) {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');

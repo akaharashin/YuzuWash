@@ -9,13 +9,16 @@
 
             @auth
                 @if (auth()->user()->role == 'cashier')
-                    <li class="nav-item"><a href="{{ route('cashierDashboard') }}" class="nav-link text-white">List Order</a></li>
+                    <li class="nav-item"><a href="{{ route('cashierDashboard') }}" class="nav-link text-white">List
+                            Order</a></li>
                     <li class="nav-item" style="margin-right: 4em;"><a href="{{ route('paymentHistory') }}"
                             class="nav-link text-white">Riwayat Pembayaran</a>
                     </li>
                 @endif
                 @if (auth()->user()->role == 'owner')
-                    <li class="nav-item" style="margin-right: 4em;"><a href="{{ route('income') }}" class="nav-link text-white">Total Keuntungan</a></li>
+                    <li class="nav-item"><a href="{{ route('report') }}" class="nav-link text-white">Laporan</a></li>
+                    <li class="nav-item" style="margin-right: 4em;"><a href="{{ route('income') }}"
+                            class="nav-link text-white">Total Keuntungan</a></li>
                 @endif
 
                 <li class="nav-item"><a href="{{ route('logout') }}" class="btn btn-warning">Keluar</a></li>

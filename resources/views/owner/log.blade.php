@@ -26,7 +26,10 @@
             </table>
             <a href="{{ route('report') }}" class="btn btn-success">Kembali</a>
             @if (auth()->user()->id == 3)
-                <a href="" onclick="clearLog()" class="btn btn-danger ms-2">Clear Log</a>
+                {{-- <a href="{{ route('clearLog') }}" class="btn btn-danger ms-2">Clear Log</a> --}}
+                <form action="{{ route('clearLog') }}" method="POST">
+                    <button type="submit" class="btn btn-danger">Clear Log</button>
+                </form>
             @endif
         </div>
     </div>

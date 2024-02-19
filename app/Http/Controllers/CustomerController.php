@@ -72,6 +72,7 @@ class CustomerController extends Controller
             'product_id' => $id,
             'custName' => $request->custName,
             'contact' => $request->contact,
+            'plat' => $request->plat,
             'status' => 'list',
         ]);
 
@@ -85,9 +86,6 @@ class CustomerController extends Controller
 
         return redirect()->route('orderSuccess');
     }
-
-
-
 
     function orderSuccess()
     {

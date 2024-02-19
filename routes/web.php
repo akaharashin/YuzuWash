@@ -61,5 +61,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/transactions/search', [TransactionController::class, 'search'])->name('transactions.search');
         Route::get('/income', [TransactionController::class, 'income'])->name('income');
         Route::get('/log', [TransactionController::class, 'log'])->name('log');
+        Route::post('/clear-log', [TransactionController::class, 'clearLog'])->name('clearLog');
     });
 });

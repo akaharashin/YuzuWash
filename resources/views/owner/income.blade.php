@@ -21,8 +21,8 @@
     </style>
     <div class="row mt-5 mb-5 pb-5">
         <div class="col-10 mx-auto d-flex">
-            <div class="card w-50 h-75 p-3">
-                <h5>Fitur Pencarian Sesuai Tanggal</h5>
+            <div class="card w-50 d-inline-block p-3">
+                <h5>Filter Sesuai Tanggal</h5>
                 <div class="card-body">
                     <form method="GET" action="{{ route('income') }}">
                         @csrf

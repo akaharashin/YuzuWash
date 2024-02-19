@@ -9,7 +9,7 @@
         }
     </style>
     <div class="row pt-5 pb-5 mb-5">
-        <div class="col-9 mx-auto">
+        <div class="col-11 mx-auto">
             <h2 class="mb-4">Daftar Pesanan</h2>
             @if (Session::has('message'))
                 <span class="alert-success alert mb-5">{{ Session::get('message') }}</span>
@@ -22,6 +22,7 @@
                         <th>No.</th>
                         <th>Nama Pelanggan</th>
                         <th>Kontak Pelanggan</th>
+                        <th>Plat Kendaraan</th>
                         <th>Paket</th>
                         <th>Harga Paket</th>
                         <th>Tanggal Pemesanan</th>
@@ -31,9 +32,10 @@
                 <tbody>
                     @forelse ($orders as $order)
                         <tr>
-                            <td>{{ $loop->index + 1 }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $order->custName }}</td>
                             <td>{{ $order->contact }}</td>
+                            <td>{{ $order->plat }}</td>
                             <td>{{ $order->product->name }}</td>
                             <td>Rp{{ number_format($order->product->price, 0, ',', '.') }}</td>
                             <td>{{ \Carbon\Carbon::parse($order->created_at)->locale('id')->isoFormat('dddd - DD MMMM YYYY') }}

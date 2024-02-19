@@ -18,6 +18,9 @@
                             <input type="text" class="form-control" name="contact" required
                                 placeholder="Masukan kontak pelanggan">
                         </label>
+                        <label class="form-label"> Plat Nomer
+                            <input type="text" class="form-control" name="plat" required" placeholder="Masukan Plat Kendaraan">
+                        </label>
                         <label class="form-label"> Paket Pilihan
                             <input type="text" class="form-control" name="package" disabled required
                                 value="{{ $product->name }}">

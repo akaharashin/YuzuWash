@@ -80,7 +80,7 @@ class AdminController extends Controller
             'activity' => ' telah memperbarui paket ' . $package
         ]);
 
-        return redirect()->route('admin')->with('message', 'Paket berhasil diperbaharui');;
+        return redirect()->route('admin')->with('message', 'Paket berhasil diperbaharui');
     }
 
     function delete(Product $product)

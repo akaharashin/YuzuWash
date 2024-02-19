@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained();
             $table->string('custName');
             $table->string('contact');
+            $table->string('plat')->unique();
             $table->enum('status', ['list', 'paid']);
             $table->timestamps();
         });
