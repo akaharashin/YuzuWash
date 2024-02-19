@@ -29,13 +29,13 @@ class AuthController extends Controller
         if ($user->role == 'cashier') {
             Log::create([
                 'user_id' => auth()->user()->id,
-                'activity' => auth()->user()->name .' telah login'
+                'activity' => 'telah melakukan login'
             ]);
             return redirect()->route('cashierDashboard')->with('message', 'Selamat datang ' . $user->name);
         } else if ($user->role == 'admin') {
             Log::create([
                 'user_id' => auth()->user()->id,
-                'activity' => auth()->user()->name .' telah login'
+                'activity' => 'telah melakukan login'
             ]);
             return redirect()->route('admin')->with('message', 'Selamat datang ' . $user->name);
         } else {

@@ -34,15 +34,15 @@
                             <button type="submit" class="btn btn-warning">Cari</button>
                         </div>
                     </form>
-                    
+
                     <a href="{{ route('log') }}" class="btn btn-success mb-4">Log Aktifitas</a>
                     <a href="javascript:void(0);" onclick="printInvoice()" class="btn btn-secondary mb-4">
                         Print satu halaman
                     </a>
                     <!-- Tabel Transaksi -->
-                    <table class="table d-flex flex-column">
-                        <tr>
-                            <th>No</th>
+                    <table class="table table-striped d-flex flex-column">
+                        <tr class="table-success">
+                            <th>No.</th>
                             <th>Nama Pelanggan</th>
                             <th>Kontak Pelanggan</th>
                             <th>Uang Dibayar</th>
@@ -58,7 +58,8 @@
                                 <td>{{ number_format($transaction->cash, 0, ',', '.') }}</td>
                                 <td>Rp{{ number_format($transaction->change, 0, ',', '.') }}</td>
                                 <td>{{ $transaction->uniqcode }}</td>
-                                <td>{{ $transaction->created_at->format('d M - Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($transaction->created_at)->locale('id')->isoFormat('dddd - DD MMMM YYYY') }}
+                                </td>
                             </tr>
                         @empty
                             <tr>
@@ -76,26 +77,28 @@
             // Sembunyikan tombol cetak sebelum mencetak
             document.querySelectorAll('.btn-warning').forEach(function(btn) {
                 btn.style.display = 'none';
-            });
-    
+        });
+
             // Membuat salinan elemen tabel yang ingin dicetak
             var printContent = document.querySelector('table').cloneNode(true);
-    
+
             // Membuat halaman baru untuk mencetak
             var printWindow = window.open('', '_blank');
             printWindow.document.open();
-    
+
             // Menambahkan elemen tabel yang telah disalin ke   halaman baru
-            printWindow.document.write('<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: "Arial", sans-serif; font-size: 12pt;}}</style></head><body>');
+            printWindow.document.write(
+                '<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: sans-serif; font-size: 12pt; border: 1px solid black; padding: 15px } th{border-bottom: 1px solid black;} tr:nth-child(even){background-color: lightblue;}}</style></head><body>'
+            );
             printWindow.document.write(printContent.outerHTML);
             printWindow.document.write('</body></html>');
             printWindow.document.close();
-    
+
             // Mencetak halaman baru
             printWindow.print();
-            printWindow.onafterprint = function () {
+            printWindow.onafterprint = function() {
                 printWindow.close();
-                
+
                 // Tampilkan kembali tombol cetak setelah mencetak selesai
                 document.querySelectorAll('.btn-warning').forEach(function(btn) {
                     btn.style.display = 'inline';

@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     // untuk menampilan product di transaksi kasir
     function cashierDashboard() {
-        $orders = Order::where('status', 'list')->get();
+        $orders = Order::where('status', 'list')->paginate(8);
         return view('cashier.cashier-dashboard', compact('orders'));
     }
 

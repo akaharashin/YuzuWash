@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 // guest
 Route::get('/', [CustomerController::class, 'index'])->name('home');
-Route::get('/package/{product}', [CustomerController::class, 'orderForm'])->name('orderForm');
-Route::post('/package/{product}', [CustomerController::class, 'order'])->name('order');
-Route::get('/order-success', [CustomerController::class, 'orderSuccess'])->name('orderSuccess');
-// auth
+// guest
 Route::middleware('guest')->group(function () {
+    Route::get('/package/{product}', [CustomerController::class, 'orderForm'])->name('orderForm');
+    Route::post('/package/{product}', [CustomerController::class, 'order'])->name('order');
+    Route::get('/order-success', [CustomerController::class, 'orderSuccess'])->name('orderSuccess');
     Route::get('/loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 });

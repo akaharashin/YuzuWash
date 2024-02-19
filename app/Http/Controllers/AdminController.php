@@ -23,6 +23,7 @@ class AdminController extends Controller
     function add(Request $request)
     {
         $data = $request->validate([
+            'user_id' => $user = auth()->user()->id,
             'name' => 'required',
             'price' => 'required|numeric',
             'desc' => 'required',
@@ -30,7 +31,11 @@ class AdminController extends Controller
             'estimate' => 'required',
         ]);;
 
-        Product::create($data);
+        if($user == 2) {
+            Product::create($data);
+        }else{
+            return back()->with('message', 'ada kesalahan');
+        }
 
         $package = $request->name;
 
@@ -96,12 +101,12 @@ class AdminController extends Controller
 
     function deleteCashier($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         Log::create([
             'user_id' => auth()->user()->id,
             'activity' => ' telah menghapus kasir ' . $user->name
         ]);
-        $user->delete($id);
+        $user->delete();
         return redirect()->route('manageCashier')->with('message', 'Kasir berhasil dihapus');;
     }
 

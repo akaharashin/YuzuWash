@@ -13,7 +13,7 @@
                     <table class="table mt-5">
                         <tr>
                             <th>Nama Pelanggan</th>
-                            <th>Kontak Pelanggan</th>   
+                            <th>Kontak Pelanggan</th>
                             <th>Uang Dibayar</th>
                             <th>Uang Kembalian</th>
                             <th>Kode Pemesanan</th>
@@ -24,11 +24,11 @@
 
                             <td>{{ $transaction->order->custName }}</td>
                             <td>{{ $transaction->order->contact }}</td>
-                            <td>Rp{{ number_format($transaction->cash, 0, ',' , '.') }}</td>
-                            <td>Rp{{ number_format($transaction->change, 0, ',' , '.') }}</td>
+                            <td>Rp{{ number_format($transaction->cash, 0, ',', '.') }}</td>
+                            <td>Rp{{ number_format($transaction->change, 0, ',', '.') }}</td>
                             <td>{{ $transaction->uniqcode }}</td>
-                            <td>{{ $transaction->created_at }}</td>
-                            <td>
+                            <td>{{ \Carbon\Carbon::parse($transaction->created_at)->locale('id')->isoFormat('dddd - DD MMMM YYYY') }}
+                                <td>
                                 <button class="btn btn-secondary" onclick="printInvoice()" id="printButton">
                                     Print
                                 </button>
@@ -55,14 +55,16 @@
             printWindow.document.open();
 
             // Menambahkan elemen card yang telah disalin ke halaman baru
-            printWindow.document.write('<html><head><title>Invoice Cuci Mobil</title><style>@media print {.card {width: 100%; font-family: sans; font-size: 12pt;}}</style></head><body>');
+            printWindow.document.write(
+                '<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: sans-serif; font-size: 12pt; border: 1px solid black; padding: 10px} th{border-bottom: 1px solid black} }</style></head><body>'
+            );
             printWindow.document.write(printContent.outerHTML);
             printWindow.document.write('</body></html>');
             printWindow.document.close();
 
             // Mencetak halaman baru
             printWindow.print();
-            printWindow.onafterprint = function () {
+            printWindow.onafterprint = function() {
                 printWindow.close();
                 // Tampilkan kembali tombol cetak setelah mencetak selesai
                 document.getElementById('printButton').style.display = 'inline';

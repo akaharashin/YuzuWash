@@ -3,20 +3,21 @@
 @section('title', 'Total Pemasukan')
 
 @section('body')
+    
     <style>
         /* .chart {
-            width: 400px;
-            height: 300px;
-            border: 1px solid #ccc;
-            position: relative;
-        }
+                        width: 400px;
+                        height: 300px;
+                        border: 1px solid #ccc;
+                        position: relative;
+                    }
 
-        .bar {
-            position: absolute;
-            bottom: 0;
-            width: 20px;
-            background-color: blue;
-        } */
+                    .bar {
+                        position: absolute;
+                        bottom: 0;
+                        width: 20px;
+                        background-color: blue;
+                    } */
     </style>
     <div class="row mt-5 mb-5 pb-5">
         <div class="col-10 mx-auto d-flex">
@@ -27,7 +28,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="start_date">Tanggal Awal:</label>
-                            <input type="date" class="form-control" name="start_date">
+                            <input type="date" class="form-control start_date" name="start_date">
                         </div>
                         <div class="form-group">
                             <label for="end_date">Tanggal Akhir:</label>
@@ -45,13 +46,13 @@
                 <tbody>
                     @foreach ($transactions as $transaction)
                         <tr>
-                            <td>{{ $transaction->created_at->format('D - d  M - Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($transaction->created_at)->locale('id')->isoFormat('dddd - DD MMMM YYYY') }}
                             <td>Rp{{ number_format($transaction->order->product->price, 0, ',', '.') }}</td>
                         </tr>
                     @endforeach
                     <tr>
                         <td colspan="2"><strong>Total Keuntungan:</strong> <strong
-                                style="padding-left: 15em;">Rp{{ number_format($totalIncome, 0, ',', '.') }}</strong></td>
+                                style="padding-left: 17em;">Rp{{ number_format($totalIncome, 0, ',', '.') }}</strong></td>
                     </tr>
                 </tbody>
             </table>
@@ -82,7 +83,5 @@
           chartContainer.appendChild(bar);
         });
       </script> --}}
-
-
 
 @endsection

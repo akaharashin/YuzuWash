@@ -4,19 +4,8 @@
 
 @section('body')
     <style>
-        span .inline-flex {
+        span .inline-flex svg {
             display: none;
-        }
-
-        nav .justify-between {
-            display: flex;
-            justify-content: center;
-        }
-
-        nav p {
-            display: flex;
-            justify-content: center;
-            text-indent: 4px
         }
     </style>
     <div class="row mt-5 pb-5 mb-5">
@@ -27,9 +16,9 @@
                     <a href="javascript:void(0);" onclick="printInvoice()" class="btn btn-secondary mt-3">
                         Print satu halaman
                     </a>
-                    <table class="table mt-5 d-flex flex-column">
-                        <tr>
-                            <th>No </th>
+                    <table class="table table-striped mt-5 d-flex flex-column">
+                        <tr class="table-success">
+                            <th>No.</th>
                             <th>Nama Pelanggan</th>
                             <th>Kontak Pelanggan</th>
                             <th>Uang Dibayar</th>
@@ -42,18 +31,18 @@
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $transaction->order->custName }}</td>
                                 <td>{{ $transaction->order->contact }}</td>
-                                <td>{{ number_format($transaction->cash, 0, ',' , '.') }}</td>
-                                <td>Rp{{ number_format($transaction->change, 0, ',' , '.') }}</td>
+                                <td>{{ number_format($transaction->cash, 0, ',', '.') }}</td>
+                                <td>Rp{{ number_format($transaction->change, 0, ',', '.') }}</td>
                                 <td>{{ $transaction->uniqcode }}</td>
-                                <td>{{ $transaction->created_at->format('D - d M - Y') }}</td>
-                            </tr>
+                                <td>{{ \Carbon\Carbon::parse($transaction->created_at)->locale('id')->isoFormat('dddd - DD MMMM YYYY') }}
+                                </tr>
                         @empty
                             <tr>
                                 <td colspan="5">Belum ada riwayat pesanan saat ini : </td>
                             </tr>
                         @endforelse
                     </table>
-                    {{ $transactions->links() }}
+                    <span class="text-center">{{ $transactions->links() }}</span>
                     @if ($transactions->isNotEmpty())
                         <a href="{{ route('paymentSuccess', $transactions[0]->id) }}" class="btn btn-success">Kembali</a>
                     @endif
@@ -78,16 +67,18 @@
         printWindow.document.open();
 
         // Menambahkan elemen tabel yang telah disalin ke   halaman baru
-        printWindow.document.write('<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: sans-serif; font-size: 12pt;}}</style></head><body>');
+        printWindow.document.write(
+            '<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: sans-serif; font-size: 12pt; border: 1px solid black; padding: 15px } th{border-bottom: 1px solid black;} tr:nth-child(even){background-color: lightblue;}}</style></head><body>'
+        );
         printWindow.document.write(printContent.outerHTML);
         printWindow.document.write('</body></html>');
         printWindow.document.close();
 
         // Mencetak halaman baru
         printWindow.print();
-        printWindow.onafterprint = function () {
+        printWindow.onafterprint = function() {
             printWindow.close();
-            
+
             // Tampilkan kembali tombol cetak setelah mencetak selesai
             document.querySelectorAll('.btn-warning').forEach(function(btn) {
                 btn.style.display = 'inline';

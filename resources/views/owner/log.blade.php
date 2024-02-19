@@ -19,8 +19,8 @@
                         <tr>
                             <td>{{ $log->user->name ? $log->user->name : 'Pengguna' }}</td>
                             <td>{{ $log->activity }}</td>
-                            <td>{{ $log->created_at }}</td>
-                        </tr>
+                            <td>{{ \Carbon\Carbon::parse($log->created_at)->locale('id')->isoFormat('dddd - DD MMMM YYYY') }}
+                            </tr>
                     @endforeach
                 </tbody>
             </table>
