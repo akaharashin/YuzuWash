@@ -1,7 +1,7 @@
 <section class="mt-5 pt-5" style="padding-top: 2em">
-    <footer class="text-center bg-light p-3">
-        <div class="footer-content">
-            PT YuzuWash Purnama<br>
+    <footer class="text-center p-3" style="background-color: #1F424C">
+        <div class="footer-content text-light">
+            PT YuzuWash Sukabumi<br>
             Jl. Pelabuhan 2 No.99 <br>
             Kota Sukabumi,
             Jawa Barat 43115

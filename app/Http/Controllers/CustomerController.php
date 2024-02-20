@@ -23,37 +23,16 @@ class CustomerController extends Controller
         return view('customer.order', compact('product'));
     }
 
-    // function order(Request $request, $id) {
-    //     $request->validate([
-    //         'custName' => 'required',
-    //         'contact' => 'required',
-    //     ]);
-
-    //     $product = Product::find($id);
-    //     Order::create([
-    //         'product_id' => $id,
-    //         'custName' => $request->custName,
-    //         'contact' => $request->contact,
-    //         'status' => 'list',
-    //     ]);
-
-    //     Log::create([
-    //         'user_id'=> 4,
-    //         'activity' =>  $request->custName .' telah melakukan pemesanan paket '. $product->name
-    //     ]);
-
-    //     return redirect()->route('orderSuccess');
-    // }
-
 
     function order(Request $request, $id)
     {
-        $request->validate([
-            'custName' => 'required',
+        $data = $request->validate([
+            'customer' => 'required',
             'contact' => 'required',
+            'plat' => 'required',
         ]);
 
-        // // Periksa apakah ada waktu pemesanan terakhir dalam session
+        // Periksa apakah ada waktu pemesanan terakhir dalam session
         // if (Session::has('last_order_time')) {
         //     $lastOrderTime = Session::get('last_order_time');
         //     $currentTime = now();
@@ -70,7 +49,7 @@ class CustomerController extends Controller
         $product = Product::find($id);
         Order::create([
             'product_id' => $id,
-            'custName' => $request->custName,
+            'customer' => $request->customer,
             'contact' => $request->contact,
             'plat' => $request->plat,
             'status' => 'list',
@@ -81,7 +60,7 @@ class CustomerController extends Controller
             'activity' =>  $request->custName . ' telah melakukan pemesanan paket ' . $product->name
         ]);
 
-        // Simpan waktu pemesanan terakhir dalam session
+        //Simpan waktu pemesanan terakhir dalam session
         // Session::put('last_order_time', now());
 
         return redirect()->route('orderSuccess');

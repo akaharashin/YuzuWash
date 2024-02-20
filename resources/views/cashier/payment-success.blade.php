@@ -1,17 +1,17 @@
 @extends('layout.main')
 
-@section('title', 'Invoice')
+@section('title', 'Pembayaran Berhasil!')
 
 @section('body')
 
     <div class="row mt-5 pt-5 vh-100">
         <div class="col-10 mx-auto">
             <div class="card">
-                <div class="card-body">
-                    <h3>Transaksi cuci mobil berhasil</h3>
+                <div class="card-body bg-blue-1">
+                    <h3 class>Pembayaran berhasil</h3>
                     <a href="{{ route('paymentHistory') }}" class="btn btn-success mt-3">Riwayat Pembayaran</a>
-                    <table class="table mt-5">
-                        <tr>
+                    <table class="table mt-5 table-striped">
+                        <tr class="table-success">
                             <th>Nama Pelanggan</th>
                             <th>Kontak Pelanggan</th>
                             <th>Uang Dibayar</th>
@@ -21,8 +21,7 @@
                             <th></th> <!-- Kolom kosong untuk menyimpan tombol cetak -->
                         </tr>
                         <tr>
-
-                            <td>{{ $transaction->order->custName }}</td>
+                            <td>{{ $transaction->order->customer }}</td>
                             <td>{{ $transaction->order->contact }}</td>
                             <td>Rp{{ number_format($transaction->cash, 0, ',', '.') }}</td>
                             <td>Rp{{ number_format($transaction->change, 0, ',', '.') }}</td>

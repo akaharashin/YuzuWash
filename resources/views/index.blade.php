@@ -1,19 +1,18 @@
 @extends('layout.main')
 
-@section('title', 'Home')
-
+@section('title', 'Beranda')
 
 @section('body')
     <section>
-        <div class="row">
-            <div class="col-8">
-                <img src="images/banner.jpg" alt="" height="450px" width="100%">
+        <div class="row p-0">
+            <div class="col-8 p-0">
+                <img src="images/banner.jpg" alt="" class="rounded-start" width="100%">
             </div>
-            <div class="col-4" style="background-color: #1B8597">
-                <div class="texts">
-                    <h2 class="pt-5 mt-5 px-3">Jangan Ragu, Buktikan Sendiri Kualitas YuzuWash Dengan Layanan Satu Kali Cuci
+            <div class="col-4 p-0 bg-banner" style="border-top-right-radius: 8px; border-bottom-right-radius: 8px; height: 100%;">
+                <div class="texts text-light pb-3 mb-5">
+                    <h2 class="pt-5 mt-4 px-4">Jangan Ragu, Buktikan Sendiri Kualitas YuzuWash Dengan Layanan Satu Kali Cuci
                     </h2>
-                    <p class="px-5  mt-5 fs-5"> &#10004; Pesan &nbsp;&#10004; Datang &nbsp; &#10004;Bersih</p>
+                    <p class="px-5 mt-5 fs-5" style="padding-bottom: 42px;"> &#10004; Pesan &nbsp;&#10004; Datang &nbsp; &#10004;Bersih</p>
                 </div>
             </div>
         </div>
@@ -25,14 +24,14 @@
         <div class="row mx-5 px-5 mt-4">
             @foreach ($products as $product)
                 <div class="col-4">
-                    <div class="card p-3 mb-4 shadow-sm">
+                    <div class="card p-3 mb-4 shadow-sm cardbg">
                         <div class="card-body d-flex flex-column">
                             <h4 class="card-title">{{ $product->name }}</h4>
                             <p>{{ $product->desc }}</p>
 
                             <ul class="list-group mt-4">
                                 @foreach (explode(',', $product->services) as $service)
-                                    <li class="list-group-item">&#128505; {{ trim($service) }}</li>
+                                    <li class="list-group-item bg-yellow-1">&#128505; {{ trim($service) }}</li>
                                 @endforeach
                             </ul>
                             <label for="" class="d-block mt-4 opacity-75">Harga</label>
@@ -42,9 +41,8 @@
                                 style="font-size: 0.9em; background-color: #1B8597">&#x1F551; Estimasi
                                 {{ $product->estimate }} jam</span>
                             @guest
-                                <a href="{{ route('orderForm', $product->id) }}" class="btn mt-3 text-white"
-                                    style="background-color:#00ABBF;">Pesan</a>
-
+                                <a href="{{ route('orderForm', $product->id) }}" class="btn mt-3 btn-warning
+                                    ">Pesan</a>
                             @endguest
                         </div>
                     </div>

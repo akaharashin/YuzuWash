@@ -18,7 +18,7 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         return [
-            'order_id' => $this->faker->numberBetween(1, 10),
+            'order_id' => $this->faker->numberBetween(1, 12),
             'user_id' => 1,
             'uniqcode' => 'INV-'. Str::random(8),
             'cash' => $this->faker->randomElement([75000, 125000, 275000,100000, 250000, 300000]),

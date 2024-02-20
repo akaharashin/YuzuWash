@@ -21,9 +21,8 @@ class AuthController extends Controller
         ]);
         
 
-        Auth::attempt($credentials);
         if(!Auth::attempt($credentials)){
-            return redirect()->back()->with('message', 'Username atau Password salah');
+            return redirect()->back()->with('message', 'Nama Pengguna atau Kata Sandi salah!');
         }
         $user = Auth::user();
         if ($user->role == 'cashier') {
@@ -45,6 +44,6 @@ class AuthController extends Controller
 
     function logout() {
         auth()->logout();
-        return redirect()->route('loginPage')->with('logout', 'Logout Berhasil');
+        return redirect()->route('loginPage')->with('logout', 'Keluar berhasil, sampai ketemu lagi!');
     }
 }

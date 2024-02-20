@@ -5,18 +5,18 @@
 @section('body')
     <div class="row mt-5 pt-5">
         <div class="col-10 mx-auto">
-            <a href="{{ route('addPage') }}" class="btn btn-success mb-4">Tambah Paket</a>
-            <a href="{{ route('manageCashier') }}" class="btn btn-success mb-4">Manage Kasir</a>
+            <a href="{{ route('addPage') }}" class="btn btn-success mb-4">Tambah Paket Baru</a>
+            <a href="{{ route('manageCashier') }}" class="btn btn-success mb-4">Kelola Kasir</a>
             {{-- <a href="{{ route('log') }}" class="btn btn-success mb-4">Log Aktifitas</a> --}}
             @if (Session::has('message'))
                 <span class="alert-success alert mb-5 d-block w-50">{{ Session::get('message') }}</span>
             @endif
             <div class="card">
-                <table class="table">
+                <table class="table table-striped table-info">
                     <tr>
                         <th>Nama Paket</th>
-                        <th>Harga Paket</th>
-                        <th>Deskripsi Paket</th>
+                        <th>Harga</th>
+                        <th>Deskripsi</th>
                         <th>Layanan - Layanan</th>
                         <th>Estimasi</th>
                         <th>Aksi</th>
@@ -24,7 +24,7 @@
                     @foreach ($products as $product)
                         <tr>
                             <td>{{ $product->name }}</td>
-                            <td>Rp{{ $product->price }}</td>
+                            <td>Rp{{ number_format($product->price, 0, ',' , '.') }}</td>
                             <td>{{ $product->desc }}</td>
                             <td>{{ $product->services }}</td>
                             <td>{{ $product->estimate }} Jam</td>

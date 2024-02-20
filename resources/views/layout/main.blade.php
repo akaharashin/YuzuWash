@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Yuzu Wash - @yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/my.css') }}">
+    <link rel="shortcut icon" href="{{ asset('images/yuzu-navy.png') }}" type="image/x-icon">
 </head>
 <body>
     @include('layout.nav')

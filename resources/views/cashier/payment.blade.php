@@ -1,11 +1,11 @@
 @extends('layout.main')
 
-@section('title', 'Transaction')
+@section('title', 'Pembayaran')
 
 @section('body')
     <div class="row mt-5 pt-5">
         <div class="col-6 mx-auto">
-            <div class="card p-4 shadow-sm">
+            <div class="card p-4 shadow-sm bg-blue-1">
                 <h3>Form Transaksi</h3>
                 <div class="card-body">
                     <form action="{{ route('payment', $order->id) }}" method="POST" class="d-flex flex-column"
@@ -13,7 +13,7 @@
                         @csrf
                         <label class="form-label"> Nama Pelanggan
                             <input type="text" class="form-control" name="custName" required
-                                placeholder="Masukan nama pelanggan" value="{{ $order->custName }}" readonly>
+                                placeholder="Masukan nama pelanggan" value="{{ $order->customer }}" readonly>
                         </label>
                         <label class="form-label"> Kontak/No.Telp
                             <input type="text" class="form-control" name="contact" required

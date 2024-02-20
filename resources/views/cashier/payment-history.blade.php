@@ -1,21 +1,39 @@
 @extends('layout.main')
 
-@section('title', 'Invoice')
+@section('title', 'Riwayat Pembayaran')
 
 @section('body')
     <style>
         span .inline-flex svg {
             display: none;
         }
+
+        span .inline-flex{
+            text-decoration: none;
+        }
+
+        .card{
+            background-color: #C5E8EF;
+        }
+        
     </style>
     <div class="row mt-5 pb-5 mb-5">
         <div class="col-10 mx-auto">
-            <div class="card p-3">
+            <div class="card p-3 bg-blue-1">
                 <div class="card-body">
-                    <h3 class="">History Pembayaran</h3>
+                    <h3 class="">Riwayat Pembayaran</h3>
                     <a href="javascript:void(0);" onclick="printInvoice()" class="btn btn-secondary mt-3">
                         Print satu halaman
                     </a>
+                    <!-- Formulir Pencarian -->
+                    <form action="{{ route('transactions.search.cashier') }}" method="GET" class="mt-3 mb-3 w-75 text-center">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Cari...">
+                            <button type="submit" class="btn btn-warning">Cari</button>
+                        </div>
+                    </form>
+                    <p class="text-success">*Data diurutkan dari yang paling terbaru</p>
+
                     <table class="table table-striped mt-5 d-flex flex-column">
                         <tr class="table-success">
                             <th>No.</th>
@@ -29,7 +47,7 @@
                         @forelse ($transactions as $transaction)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $transaction->order->custName }}</td>
+                                <td>{{ $transaction->order->customer }}</td>
                                 <td>{{ $transaction->order->contact }}</td>
                                 <td>{{ number_format($transaction->cash, 0, ',', '.') }}</td>
                                 <td>Rp{{ number_format($transaction->change, 0, ',', '.') }}</td>

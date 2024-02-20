@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
-            $table->string('custName');
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('customer');
             $table->string('contact');
-            $table->string('plat')->unique();
+            $table->string('plat');
             $table->enum('status', ['list', 'paid']);
             $table->timestamps();
         });

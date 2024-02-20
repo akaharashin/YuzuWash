@@ -3,25 +3,25 @@
 @section('title', 'Total Pemasukan')
 
 @section('body')
-    
+
     <style>
         /* .chart {
-                        width: 400px;
-                        height: 300px;
-                        border: 1px solid #ccc;
-                        position: relative;
-                    }
+                                width: 400px;
+                                height: 300px;
+                                border: 1px solid #ccc;
+                                position: relative;
+                            }
 
-                    .bar {
-                        position: absolute;
-                        bottom: 0;
-                        width: 20px;
-                        background-color: blue;
-                    } */
+                            .bar {
+                                position: absolute;
+                                bottom: 0;
+                                width: 20px;
+                                background-color: blue;
+                            } */
     </style>
     <div class="row mt-5 mb-5 pb-5">
         <div class="col-10 mx-auto d-flex">
-            <div class="card w-50 d-inline-block p-3">
+            <div class="card w-50 d-inline-block p-3" style="background-color: #C5E8EF">
                 <h5>Filter Sesuai Tanggal</h5>
                 <div class="card-body">
                     <form method="GET" action="{{ route('income') }}">
@@ -35,10 +35,11 @@
                             <input type="date" class="form-control" name="end_date">
                         </div>
                         <button type="submit" class="btn btn-secondary mt-3">Filter</button>
+                        <a href="javascript:void(0);" onclick="printIncome()" class="btn btn-secondary mt-3">Print Hasil Filter</a>
                     </form>
                 </div>
             </div>
-            <table class="table w-75">
+            <table class="table w-75 table-striped">
                 <thead>
                     <th>Tanggal</th>
                     <th>Pemasukan</th>
@@ -60,8 +61,43 @@
     </div>
     <a href="{{ route('report') }}" class="btn btn-success" style="margin-left: 8em">Kembali</a>
 
-    {{-- <div class="chart" id="chart"></div>
+    <script>
+        function printIncome(url) {
+            // Sembunyikan tombol cetak sebelum mencetak
+            document.querySelectorAll('.btn-warning').forEach(function(btn) {
+                btn.style.display = 'none';
+            });
 
+            // Membuat salinan elemen tabel yang ingin dicetak
+            var printContent = document.querySelector('table').cloneNode(true);
+
+            // Membuat halaman baru untuk mencetak
+            var printWindow = window.open('', '_blank');
+            printWindow.document.open();
+
+            // Menambahkan elemen tabel yang telah disalin ke   halaman baru
+            printWindow.document.write(
+                '<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: sans-serif; font-size: 12pt; border: 1px solid black; padding: 15px } th{border-bottom: 1px solid black;} tr:nth-child(even){background-color: lightblue;}}</style></head><body>'
+            );
+            printWindow.document.write(printContent.outerHTML);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+
+            // Mencetak halaman baru
+            printWindow.print();
+            printWindow.onafterprint = function() {
+                printWindow.close();
+
+                // Tampilkan kembali tombol cetak setelah mencetak selesai
+                document.querySelectorAll('.btn-warning').forEach(function(btn) {
+                    btn.style.display = 'inline';
+                });
+            };
+        }
+    </script>
+
+    {{-- <div class="chart" id="chart"></div>
+    
     <script>
         // Data keuntungan per bulan dari controller
         const monthlyIncome = {!! json_encode($monthlyIncome) !!};

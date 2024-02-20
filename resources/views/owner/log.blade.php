@@ -1,44 +1,45 @@
 @extends('layout.main')
 
-@section('title', 'Log')
+@section('title', 'Log Aktifitas Petugas')
 
 @section('body')
-    <div class="row mt-5 mb-1 vh-100">
-        <div class="col-8 mx-auto">
+    <div class="row mt-5 mb-1 h-100">
+        <div class="col-10 mx-auto">
             <h2 class="mb-4">Log Aktifitas</h2>
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Oleh</th>
                         <th>Aktifitas</th>
                         <th>Tanggal</th>
+                        <th>Pukul</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($logs as $log)
+                    @forelse ($logs as $log)
                         <tr>
                             <td>{{ $log->user->name ? $log->user->name : 'Pengguna' }}</td>
                             <td>{{ $log->activity }}</td>
                             <td>{{ \Carbon\Carbon::parse($log->created_at)->locale('id')->isoFormat('dddd - DD MMMM YYYY') }}
+                            <td>{{ $log->created_at->format('H:i') }} WIB</td>
                             </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td >Tidak ada aktifitas baru baru ini . . .</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
-            <a href="{{ route('report') }}" class="btn btn-success">Kembali</a>
-            @if (auth()->user()->id == 3)
-                {{-- <a href="{{ route('clearLog') }}" class="btn btn-danger ms-2">Clear Log</a> --}}
+            <div class="d-flex gap-3 mt-4 mb-5 pb-5">
+                <a href="{{ route('report') }}" class="btn btn-success mb-5">Kembali</a>
                 <form action="{{ route('clearLog') }}" method="POST">
+                    @csrf
                     <button type="submit" class="btn btn-danger">Clear Log</button>
                 </form>
-            @endif
+            </div>
         </div>
     </div>
-
-    <script>
-        const table = document.querySelector('.table');
-        function clearLog() {
-            table.style.display='none';
-            event.preventDefault();
-        } 
-    </script>
 @endsection

@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Invoice')
+@section('title', 'Pesanan Berhasil!')
     
 @section('body')
     <div class="row mt-5 pt-5 vh-100">

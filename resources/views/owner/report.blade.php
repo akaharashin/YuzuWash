@@ -1,10 +1,10 @@
 @extends('layout.main')
 
-@section('title', 'Invoice')
+@section('title', 'Laporan')
 
 @section('body')
     <style>
-        span .inline-flex {
+        span .inline-flex svg{
             display: none;
         }
 
@@ -18,6 +18,10 @@
             justify-content: center;
             text-indent: 4px
         }
+
+        span .relative {
+            display: none
+        }
     </style>
     <div class="row mt-5 pt-5 pb-5 mb-5">
         <div class="col-10 mx-auto">
@@ -25,7 +29,7 @@
             @if (Session::has('message'))
                 <span class="alert-success alert mb-5">{{ Session::get('message') }}</span>
             @endif
-            <div class="card p-3 mt-4">
+            <div class="card p-3 mt-4" style="background-color: #C5E8EF">
                 <div class="card-body">
                     <!-- Formulir Pencarian -->
                     <form action="{{ route('transactions.search') }}" method="GET" class="mb-3 w-75 text-center">
@@ -39,6 +43,7 @@
                     <a href="javascript:void(0);" onclick="printInvoice()" class="btn btn-secondary mb-4">
                         Print satu halaman
                     </a>
+                    <p class="text-success">*Data diurutkan dari yang paling terbaru</p>
                     <!-- Tabel Transaksi -->
                     <table class="table table-striped d-flex flex-column">
                         <tr class="table-success">
@@ -53,7 +58,7 @@
                         @forelse ($transactions as $transaction)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $transaction->order->custName }}</td>
+                                <td>{{ $transaction->order->customer }}</td>
                                 <td>{{ $transaction->order->contact }}</td>
                                 <td>Rp{{ number_format($transaction->cash, 0, ',', '.') }}</td>
                                 <td>Rp{{ number_format($transaction->change, 0, ',', '.') }}</td>

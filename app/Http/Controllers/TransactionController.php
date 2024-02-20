@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Log;
 use App\Models\Order;
-use App\Models\OrderList;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -13,16 +12,25 @@ use Illuminate\Support\Str;
 class TransactionController extends Controller
 {
 
+    // untuk menampilan product di transaksi kasir
+    function cashierDashboard() {
+        $orders = Order::orderBy('created_at', 'asc')->where('status', 'list')->paginate(8);
+        return view('cashier.cashier-dashboard', compact('orders'));
+    }
+
+    function paymentPage($id) {
+        $order = Order::find($id);
+        return view('cashier.payment', compact('order'));
+    }
+
     function payment(Request $request, $id)
     {
         $request->validate([
-            'custName' => 'required',
-            'contact' => 'required',
             'cash' => 'required',
         ]);
 
         $order = Order::find($id);
-        $data = Transaction::create([
+        $transaction = Transaction::create([
             'order_id' => $id,
             'user_id' => auth()->user()->id,
             'custName' => $request->custName,
@@ -32,7 +40,7 @@ class TransactionController extends Controller
             'change' => $request->cash - $order->product->price,
         ]);
 
-        $uniqcode = $data->uniqcode;
+        $uniqcode = $transaction->uniqcode;
 
         Log::create([
             'user_id' => auth()->user()->id,
@@ -42,27 +50,19 @@ class TransactionController extends Controller
         $order->status = 'paid';
         $order->save();
 
-        return redirect()->route('paymentSuccess', $id);
+        return redirect()->route('paymentSuccess', $transaction->id);
     }
 
     function paymentSuccess($id)
     {
-        $transaction = Transaction::find($id);
+        $transaction = Transaction::with('order')->find($id);
         return view('cashier.payment-success', compact('transaction'));
     }
 
     function paymentHistory()
     {
-        $transactions = Transaction::paginate(8);
+        $transactions = Transaction::orderBy('created_at', 'desc')->paginate(8);
         return view('cashier.payment-history', compact('transactions'));
-    }
-
-    // owner section
-
-    function report()
-    {
-        $transactions = Transaction::paginate(8);
-        return view('owner.report', compact('transactions'));
     }
 
     public function search(Request $request)
@@ -71,7 +71,7 @@ class TransactionController extends Controller
 
         $transactions = Transaction::where(function ($query) use ($search) {
             $query->whereHas('order', function ($subQuery) use ($search) {
-                $subQuery->where('custName', 'LIKE', "%$search%")
+                $subQuery->where('customer', 'LIKE', "%$search%")
                          ->orWhere('contact', 'LIKE', "%$search%");
             })
             ->orWhere('cash', 'LIKE', "%$search%")
@@ -79,36 +79,7 @@ class TransactionController extends Controller
             ->orWhere('uniqcode', 'LIKE', "%$search%");
         })->paginate(10);
 
-        return view('owner.report', compact('transactions'));
-    }
-
-    function log() {
-        $logs = Log::all();
-        return view('owner.log', compact('logs'));
-    }
-
-    function clearLog(Log $log) {
-        $log->delete();
-        return redirect()->route('log')->with('message', 'Log telah dibersihkan');
-    }
-
-    function income(Request $request) {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-    
-        $transactions = Transaction::query();
-    
-        if ($startDate && $endDate) {
-            // Jika kedua tanggal disediakan, filter berdasarkan rentang tanggal
-            $transactions->whereBetween('created_at', [$startDate, $endDate]);
-        }
-    
-        $transactions = $transactions->get();
-        $totalCash = $transactions->sum('cash');
-        $totalChange = $transactions->sum('change');
-        $totalIncome = $totalCash - $totalChange;
-    
-        return view('owner.income', compact('transactions', 'totalIncome'));
+        return view('cashier.payment-history', compact('transactions'));
     }
     
 }

@@ -1,11 +1,11 @@
 @extends('layout.main')
 
-@section('title', 'Transaction')
+@section('title', 'Admin')
     
 @section('body')
     <div class="row mt-5 pt-5">
         <div class="col-6 mx-auto">
-            <div class="card p-4 shadow-sm">
+            <div class="card p-4 shadow-sm bg-blue-1">
                 <h3>Edit Kasir</h3>
                 <div class="card-body">
                     <form action="{{ route('updateCashier', $cashier->id) }}" method="POST" class="d-flex flex-column">

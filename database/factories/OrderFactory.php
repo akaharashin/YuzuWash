@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Provider\id_ID\Person;
 use Termwind\Components\Element;
@@ -23,10 +24,10 @@ class OrderFactory extends Factory
     {
         $faker = $this->faker;
         $faker->addProvider(new Person($faker));
-
+        $product = Product::all()->random();
         return [
-            'product_id' => $this->faker->numberBetween(1, 3),
-            'custName' => $this->faker->name,
+            'product_id' => $product->id,
+            'customer' => $this->faker->name,
             'contact' => $this->faker->phoneNumber,
             'plat' => $this->faker->numerify('F ####'). $this->faker->lexify(' ??'),
             'status' => 'list',

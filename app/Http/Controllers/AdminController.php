@@ -6,6 +6,7 @@ use App\Models\Log;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -23,15 +24,15 @@ class AdminController extends Controller
     function add(Request $request)
     {
         $data = $request->validate([
-            'user_id' => $user = auth()->user()->id,
             'name' => 'required',
-            'price' => 'required|numeric',
+            'price' => 'required',
             'desc' => 'required',
             'services' => 'required',
             'estimate' => 'required',
-        ]);;
+        ]);
 
-        if($user == 2) {
+        if(auth()->user()->role == 'admin') {
+            $data['user_id'] = auth()->user()->id;
             Product::create($data);
         }else{
             return back()->with('message', 'ada kesalahan');
@@ -83,8 +84,9 @@ class AdminController extends Controller
         return redirect()->route('admin')->with('message', 'Paket berhasil diperbaharui');
     }
 
-    function delete(Product $product)
+    function delete($id)
     {
+        $product = Product::find($id);
         $product->delete();
         Log::create([
             'user_id' => auth()->user()->id,
@@ -106,6 +108,9 @@ class AdminController extends Controller
             'user_id' => auth()->user()->id,
             'activity' => ' telah menghapus kasir ' . $user->name
         ]);
+        if($user->id == 1){
+            return back()->with('error', 'Anda tidak bisa menghapus kasir utama');
+        }
         $user->delete();
         return redirect()->route('manageCashier')->with('message', 'Kasir berhasil dihapus');;
     }
