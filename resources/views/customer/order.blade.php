@@ -5,7 +5,7 @@
 @section('body')
     <div class="row mt-5 pt-5">
         <div class="col-6 mx-auto">
-            <div class="card p-4 shadow-sm">
+            <div class="card p-4 shadow-sm bg-blue-1">
                 <h3>Formulir Pemesanan</h3>
                 <div class="card-body">
                     <form action="{{ route('order', $product->id) }}" method="POST" class="d-flex flex-column">
