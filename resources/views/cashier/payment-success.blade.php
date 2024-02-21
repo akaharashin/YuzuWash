@@ -39,6 +39,7 @@
             </div>
         </div>
     </div>
+    
 
     <script>
         function printInvoice() {
@@ -55,7 +56,7 @@
 
             // Menambahkan elemen card yang telah disalin ke halaman baru
             printWindow.document.write(
-                '<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: sans-serif; font-size: 12pt; border: 1px solid black; padding: 10px} th{border-bottom: 1px solid black} }</style></head><body>'
+                '<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: sans-serif; font-size: 12pt; border: 1px solid black; padding: 10px} th{border-bottom: 1px solid black} }</style></head><img src="{{ asset('images/yuzu-tr.png') }}" width="75"><h2 style="font-family: sans-serif; display: inline-block; padding-left: 1em;">PT YuzuWash Sukabumi</h2><p style="font-family: sans-serif"; padding-left: 10em;>Jl. Pelabuhan No. 99, Kecamatan Citamiang, Kota Sukabumi, 43115</p><p style="font-family: sans-serif;">No Telp. 026-333</p><body>'
             );
             printWindow.document.write(printContent.outerHTML);
             printWindow.document.write('</body></html>');
