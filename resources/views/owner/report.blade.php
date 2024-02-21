@@ -63,7 +63,7 @@
                                 <td>Rp{{ number_format($transaction->cash, 0, ',', '.') }}</td>
                                 <td>Rp{{ number_format($transaction->change, 0, ',', '.') }}</td>
                                 <td>{{ $transaction->uniqcode }}</td>
-                                <td>{{ \Carbon\Carbon::parse($transaction->created_at)->locale('id')->isoFormat('dddd - DD MMMM YYYY') }}
+                                <td>{{ $carbonDate($transaction->created_at) }}
                                 </td>
                             </tr>
                         @empty

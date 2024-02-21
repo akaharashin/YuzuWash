@@ -45,11 +45,11 @@
                                     <td>{{ $order->plat }}</td>
                                     <td>{{ $order->product->name }}</td>
                                     <td>Rp{{ number_format($order->product->price, 0, ',', '.') }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($order->created_at)->locale('id')->isoFormat('dddd - DD MMMM YYYY HH:mm') }}
+                                    <td>{{ $carbonDateTime($order->created_at) }}.WIB</td>
                                     <td>
                                         <a href="{{ route('paymentPage', $order->id) }}"
                                             class="btn btn-success shadow-sm">Konfirmasi
-                                            Order</a>
+                                            Pesanan</a>
                                     </td>
                                 </tr>
                             @empty

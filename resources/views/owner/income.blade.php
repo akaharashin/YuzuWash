@@ -6,18 +6,18 @@
 
     <style>
         /* .chart {
-                                width: 400px;
-                                height: 300px;
-                                border: 1px solid #ccc;
-                                position: relative;
-                            }
+                                    width: 400px;
+                                    height: 300px;
+                                    border: 1px solid #ccc;
+                                    position: relative;
+                                }
 
-                            .bar {
-                                position: absolute;
-                                bottom: 0;
-                                width: 20px;
-                                background-color: blue;
-                            } */
+                                .bar {
+                                    position: absolute;
+                                    bottom: 0;
+                                    width: 20px;
+                                    background-color: blue;
+                                } */
     </style>
     <div class="row mt-5 mb-5 pb-5">
         <div class="col-10 mx-auto d-flex">
@@ -35,24 +35,32 @@
                             <input type="date" class="form-control" name="end_date">
                         </div>
                         <button type="submit" class="btn btn-secondary mt-3">Filter</button>
-                        <a href="javascript:void(0);" onclick="printIncome()" class="btn btn-secondary mt-3">Print Hasil Filter</a>
+                        <a href="javascript:void(0);" onclick="printIncome()" class="btn btn-secondary mt-3">Print Hasil
+                            Filter</a>
                     </form>
                 </div>
+                <p class="text-success mt-2">*Data di urutkan dari yang terbaru</p>
+                @if ($startDate && $endDate) 
+                    <p>Berikut data transaksi dari tanggal : <br>{{ $carbonDate($startDate) }} sampai-
+                        <br>{{ $carbonDate($endDate) }} &#8594;</p>
+                @endif
             </div>
             <table class="table w-75 table-striped">
                 <thead>
-                    <th>Tanggal</th>
+                    <th>No.</th>
+                    <th>Hari/Tanggal</th>
                     <th>Pemasukan</th>
                 </thead>
                 <tbody>
                     @foreach ($transactions as $transaction)
                         <tr>
-                            <td>{{ \Carbon\Carbon::parse($transaction->created_at)->locale('id')->isoFormat('dddd - DD MMMM YYYY') }}
+                            <td>{{ $loop->index + 1 }}.</td>
+                            <td>{{ $carbonDate($transaction->created_at) }}
                             <td>Rp{{ number_format($transaction->order->product->price, 0, ',', '.') }}</td>
                         </tr>
                     @endforeach
                     <tr>
-                        <td colspan="2"><strong>Total Keuntungan:</strong> <strong
+                        <td colspan="3"><strong style="padding-left: 1em">Total Keuntungan:</strong> <strong
                                 style="padding-left: 17em;">Rp{{ number_format($totalIncome, 0, ',', '.') }}</strong></td>
                     </tr>
                 </tbody>

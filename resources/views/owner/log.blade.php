@@ -20,7 +20,7 @@
                         <tr>
                             <td>{{ $log->user->name ? $log->user->name : 'Pengguna' }}</td>
                             <td>{{ $log->activity }}</td>
-                            <td>{{ \Carbon\Carbon::parse($log->created_at)->locale('id')->isoFormat('dddd - DD MMMM YYYY') }}
+                            <td>{{ $carbonDate($log->created_at) }}
                             <td>{{ $log->created_at->format('H:i') }} WIB</td>
                             </tr>
                     @empty

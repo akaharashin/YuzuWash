@@ -38,6 +38,7 @@ class OwnerController extends Controller
             ->orWhere('change', 'LIKE', "%$search%")
             ->orWhere('uniqcode', 'LIKE', "%$search%");
         })->paginate(10);
+        
 
         return view('owner.report', compact('transactions'));
     }
@@ -53,12 +54,12 @@ class OwnerController extends Controller
             $transactions->whereBetween('created_at', [$startDate, $endDate]);
         }
     
-        $transactions = $transactions->orderBy('created_at', 'asc')->get();
+        $transactions = $transactions->orderBy('created_at', 'desc')->get();
         $totalCash = $transactions->sum('cash');
         $totalChange = $transactions->sum('change');
         $totalIncome = $totalCash - $totalChange;
     
-        return view('owner.income', compact('transactions', 'totalIncome'));
+        return view('owner.income', compact('transactions', 'totalIncome', 'startDate', 'endDate'));
     }
     
 }
