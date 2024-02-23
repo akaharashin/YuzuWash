@@ -6,8 +6,6 @@ use App\Models\Log;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
@@ -57,7 +55,7 @@ class CustomerController extends Controller
 
         Log::create([
             'user_id' => 4,
-            'activity' =>  $request->custName . ' telah melakukan pemesanan paket ' . $product->name
+            'activity' =>  $request->customer . ' telah melakukan pemesanan paket ' . $product->name
         ]);
 
         //Simpan waktu pemesanan terakhir dalam session

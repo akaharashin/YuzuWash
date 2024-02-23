@@ -24,7 +24,7 @@
         }
     </style>
     <div class="row mt-5 pt-5 pb-5 mb-5">
-        <div class="col-10 mx-auto">
+        <div class="col-md-10 mx-auto">
             <h3 class="mb-4">Laporan Transaksi</h3>
             @if (Session::has('message'))
                 <span class="alert-success alert mb-5">{{ Session::get('message') }}</span>
@@ -45,7 +45,7 @@
                     </a>
                     <p class="text-success">*Data diurutkan dari yang paling terbaru</p>
                     <!-- Tabel Transaksi -->
-                    <table class="table table-striped d-flex flex-column">
+                    <table class="table table-striped d-flex">
                         <tr class="table-success">
                             <th>No.</th>
                             <th>Nama Pelanggan</th>

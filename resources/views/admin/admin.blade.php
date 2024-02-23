@@ -4,7 +4,7 @@
 
 @section('body')
     <div class="row mt-5 pt-5">
-        <div class="col-10 mx-auto">
+        <div class="col-md-10 mx-auto">
             <a href="{{ route('addPage') }}" class="btn btn-success mb-4">Tambah Paket Baru</a>
             <a href="{{ route('manageCashier') }}" class="btn btn-success mb-4">Kelola Kasir</a>
             {{-- <a href="{{ route('log') }}" class="btn btn-success mb-4">Log Aktifitas</a> --}}

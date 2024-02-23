@@ -4,7 +4,7 @@
     
 @section('body')
     <div class="row mt-5 pt-5 vh-100">
-        <div class="col-8 mx-auto">
+        <div class="col-md-8 mx-auto">
             <div class="card shadow-sm bg-blue-1">
                 <div class="card-body">
                     <h3>Pesanan cuci mobil anda berhasil! , pesanan anda akan <br> segera diproses ...</h3>

@@ -1,4 +1,4 @@
-<section class="mt-5 pt-5" style="padding-top: 2em">
+<section class="mt-5 pt-5" style="padding-top: 3em;">
     <footer class="text-center p-3" style="background-color: #1F424C">
         <div class="footer-content text-light">
             PT YuzuWash Sukabumi<br>

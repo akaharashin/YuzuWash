@@ -4,15 +4,15 @@
 
 @section('body')
     <section>
-        <div class="row p-0">
-            <div class="col-8 p-0">
-                <img src="images/banner.jpg" alt="" class="rounded-start" width="100%">
+        <div class="row p-0" data-aos="fade-in">
+            <div class="col-md-8 p-0">
+                <img src="images/banner.jpg" alt="" class="img-fluid rounded-start" style="max-width: 100%;">
             </div>
-            <div class="col-4 p-0 bg-banner" style="border-top-right-radius: 8px; border-bottom-right-radius: 8px; height: 100%;">
+            <div class="col-md-4 p-0 bg-banner" style="border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
                 <div class="texts text-light pb-3 mb-5">
                     <h2 class="pt-5 mt-4 px-4">Jangan Ragu, Buktikan Sendiri Kualitas YuzuWash Dengan Layanan Satu Kali Cuci
                     </h2>
-                    <p class="px-5 mt-5 fs-5" style="padding-bottom: 42px;"> &#10004; Pesan &nbsp;&#10004; Datang &nbsp; &#10004;Bersih</p>
+                    <p class="px-4 mt-4 fs-5">&#10004; Pesan &nbsp;&#10004; Datang &nbsp; &#10004;Bersih</p>
                 </div>
             </div>
         </div>
@@ -21,10 +21,10 @@
     <p class="fs-5 text-center">Bebas Pilih Jenis Layanan Sesuai Keinginan Anda, Urusan Cuci Mobil Biar Kami Yang Kerjakan
     </p>
     <section>
-        <div class="row mx-5 px-5 mt-4">
+        <div class="row mx-2 mx-md-5 px-2 px-md-5 mt-4">
             @foreach ($products as $product)
-                <div class="col-4">
-                    <div class="card p-3 mb-4 shadow-sm cardbg">
+                <div class="col-md-4">
+                    <div class="card p-3 mb-4 shadow-sm cardbg" data-aos="fade-up">
                         <div class="card-body d-flex flex-column">
                             <h4 class="card-title">{{ $product->name }}</h4>
                             <p>{{ $product->desc }}</p>
@@ -41,8 +41,7 @@
                                 style="font-size: 0.9em; background-color: #1B8597">&#x1F551; Estimasi
                                 {{ $product->estimate }} jam</span>
                             @guest
-                                <a href="{{ route('orderForm', $product->id) }}" class="btn mt-3 btn-warning
-                                    ">Pesan</a>
+                                <a href="{{ route('orderForm', $product->id) }}" class="btn mt-3 btn-warning">Pesan</a>
                             @endguest
                         </div>
                     </div>

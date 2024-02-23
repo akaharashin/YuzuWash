@@ -3,8 +3,8 @@
 @section('title', 'Log Aktifitas Petugas')
 
 @section('body')
-    <div class="row mt-5 mb-1 h-100">
-        <div class="col-10 mx-auto">
+    <div class="row mt-5 mb-1 pb-4 h-100">
+        <div class="col-md-10 mx-auto">
             <h2 class="mb-4">Log Aktifitas</h2>
             <table class="table table-striped">
                 <thead>

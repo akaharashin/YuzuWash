@@ -4,7 +4,7 @@
 
 @section('body')
     <div class="row mt-3 pt-5 vh-100">
-        <div class="col-6 mx-auto mt-4 pt-5">
+        <div class="col-md-6 mx-auto mt-4 pt-5">
             @if (Session::has('logout'))
                 <span class="alert alert-success mb-4 d-block">{{ Session::get('logout') }}</span>
             @endif

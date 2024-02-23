@@ -139,7 +139,6 @@ class AdminController extends Controller
             'user_id' => auth()->user()->id,
             'activity' => ' telah menambahkan kasir ' . $request->username
         ]);
-
         return redirect()->route('manageCashier')->with('message', 'Kasir telah ditambahkan');;
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Log;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OwnerController extends Controller
@@ -15,12 +16,14 @@ class OwnerController extends Controller
     }
 
 
-    function log() {
+    function log()
+    {
         $logs = Log::all();
         return view('owner.log', compact('logs'));
     }
 
-    function clearLog() {
+    function clearLog()
+    {
         Log::truncate();
         return redirect()->route('log')->with('message', 'Log telah dibersihkan');
     }
@@ -32,34 +35,45 @@ class OwnerController extends Controller
         $transactions = Transaction::where(function ($query) use ($search) {
             $query->whereHas('order', function ($subQuery) use ($search) {
                 $subQuery->where('customer', 'LIKE', "%$search%")
-                         ->orWhere('contact', 'LIKE', "%$search%");
+                    ->orWhere('contact', 'LIKE', "%$search%");
             })
-            ->orWhere('cash', 'LIKE', "%$search%")
-            ->orWhere('change', 'LIKE', "%$search%")
-            ->orWhere('uniqcode', 'LIKE', "%$search%");
+                ->orWhere('cash', 'LIKE', "%$search%")
+                ->orWhere('change', 'LIKE', "%$search%")
+                ->orWhere('uniqcode', 'LIKE', "%$search%");
         })->paginate(10);
-        
+
 
         return view('owner.report', compact('transactions'));
     }
 
-    function income(Request $request) {
+    public function income(Request $request)
+    {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
-    
+
         $transactions = Transaction::query();
-    
+
         if ($startDate && $endDate) {
             // Jika kedua tanggal disediakan, filter berdasarkan rentang tanggal
             $transactions->whereBetween('created_at', [$startDate, $endDate]);
         }
-    
-        $transactions = $transactions->orderBy('created_at', 'desc')->get();
-        $totalCash = $transactions->sum('cash');
-        $totalChange = $transactions->sum('change');
+
+        // Siapkan data untuk chart
+        $labels = [];
+        $incomeData = [];
+
+        // Mengambil transaksi setelah filtering
+        $filteredTransactions = $transactions->orderBy('created_at', 'desc')->get();
+
+        foreach ($filteredTransactions as $transaction) {
+            $labels[] = Carbon::parse($transaction->created_at)->format('d-M-Y');
+            $incomeData[] = $transaction->order->product->price;
+        }
+
+        $totalCash = $filteredTransactions->sum('cash');
+        $totalChange = $filteredTransactions->sum('change');
         $totalIncome = $totalCash - $totalChange;
-    
-        return view('owner.income', compact('transactions', 'totalIncome', 'startDate', 'endDate'));
+
+        return view('owner.income', compact('filteredTransactions', 'totalIncome', 'startDate', 'endDate', 'incomeData', 'labels'));
     }
-    
 }

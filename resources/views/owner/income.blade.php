@@ -3,24 +3,10 @@
 @section('title', 'Total Pemasukan')
 
 @section('body')
+    <canvas id="salesChart" width="400" height="200"></canvas>
 
-    <style>
-        /* .chart {
-                                    width: 400px;
-                                    height: 300px;
-                                    border: 1px solid #ccc;
-                                    position: relative;
-                                }
-
-                                .bar {
-                                    position: absolute;
-                                    bottom: 0;
-                                    width: 20px;
-                                    background-color: blue;
-                                } */
-    </style>
     <div class="row mt-5 mb-5 pb-5">
-        <div class="col-10 mx-auto d-flex">
+        <div class="col-md-10 mx-auto d-flex">
             <div class="card w-50 d-inline-block p-3" style="background-color: #C5E8EF">
                 <h5>Filter Sesuai Tanggal</h5>
                 <div class="card-body">
@@ -40,9 +26,13 @@
                     </form>
                 </div>
                 <p class="text-success mt-2">*Data di urutkan dari yang terbaru</p>
-                @if ($startDate && $endDate) 
+                @if ($startDate && $endDate)
                     <p>Berikut data transaksi dari tanggal : <br>{{ $carbonDate($startDate) }} sampai-
-                        <br>{{ $carbonDate($endDate) }} &#8594;</p>
+                        <br>{{ $carbonDate($endDate) }} &#8594;
+                    </p>
+                    
+                @else
+                    <p>Berikut adalah semua data transaksi yang telah dilakukan &#8594;</p>
                 @endif
             </div>
             <table class="table w-75 table-striped">
@@ -52,7 +42,7 @@
                     <th>Pemasukan</th>
                 </thead>
                 <tbody>
-                    @foreach ($transactions as $transaction)
+                    @foreach ($filteredTransactions as $transaction)
                         <tr>
                             <td>{{ $loop->index + 1 }}.</td>
                             <td>{{ $carbonDate($transaction->created_at) }}
@@ -71,7 +61,6 @@
 
     <script>
         function printIncome(url) {
-            // Sembunyikan tombol cetak sebelum mencetak
             document.querySelectorAll('.btn-warning').forEach(function(btn) {
                 btn.style.display = 'none';
             });
@@ -102,30 +91,36 @@
                 });
             };
         }
-    </script>
 
-    {{-- <div class="chart" id="chart"></div>
-    
-    <script>
-        // Data keuntungan per bulan dari controller
-        const monthlyIncome = {!! json_encode($monthlyIncome) !!};
-        // Tinggi maksimum grafik
-        const maxHeight = 300;
-        // Menghitung tinggi maksimum untuk skala yang konsisten
-        const maxIncome = Math.max(...monthlyIncome);
-        const barHeights = monthlyIncome.map(income => (income / maxIncome) * maxHeight);
-      
-        // Select chart container
-        const chartContainer = document.getElementById('chart');
-      
-        // Draw bars
-        barHeights.forEach((barHeight, index) => {
-          const bar = document.createElement('div');
-          bar.className = 'bar';
-          bar.style.height = barHeight + 'px';
-          bar.style.left = (index * 30 + 10) + 'px';
-          chartContainer.appendChild(bar);
+        var ctx = document.getElementById('salesChart').getContext('2d');
+        var salesChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($labels) !!},
+                datasets: [{
+                    label: 'Pemasukan',
+                    data: {!! json_encode($incomeData) !!},
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            // options: {
+            //     scales: {
+            //         yAxes: [{
+            //             ticks: {
+            //                 beginAtZero: true
+            //             }
+            //         }]
+            //     }
+            // }
         });
-      </script> --}}
+
+        function updateChart(labels, data) {
+            salesChart.data.labels = labels;
+            salesChart.data.datasets[0].data = data;
+            salesChart.update();
+        }
+    </script>
 
 @endsection
