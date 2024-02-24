@@ -25,7 +25,7 @@
                             Filter</a>
                     </form>
                 </div>
-                <p class="text-success mt-2">*Data di urutkan dari yang terbaru</p>
+                <p class="text-success mt-2">*Data di urutkan dari yang terlama</p>
                 @if ($startDate && $endDate)
                     <p>Berikut data transaksi dari tanggal : <br>{{ $carbonDate($startDate) }} sampai-
                         <br>{{ $carbonDate($endDate) }} &#8594;

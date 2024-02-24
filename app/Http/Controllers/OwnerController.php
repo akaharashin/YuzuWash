@@ -65,8 +65,8 @@ class OwnerController extends Controller
         
 
         // Mengambil transaksi setelah filtering
-        $dataTransactions=  $transactions->orderBy('created_at', 'desc')->paginate(10);
         $filteredTransactions = $transactions->orderBy('created_at', 'asc')->get();
+        $dataTransactions=  $transactions->orderBy('created_at', 'desc')->paginate(10);
         $incomeByDate = $filteredTransactions->groupBy(function ($transaction) {
             return Carbon::parse($transaction->created_at)->format('d-M-Y');
         });
