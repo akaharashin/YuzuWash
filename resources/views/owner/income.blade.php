@@ -7,7 +7,7 @@
 
     <div class="row mt-5 mb-5 pb-5">
         <div class="col-md-10 mx-auto d-flex">
-            <div class="card w-50 d-inline-block p-3" style="background-color: #C5E8EF">
+            <div class="card w-50 d-inline-block p-3" style="background-color: #C5E8EF" data-aos="fade-in" data-aos-duration="1000">
                 <h5>Filter Sesuai Tanggal</h5>
                 <div class="card-body">
                     <form method="GET" action="{{ route('income') }}">
@@ -35,14 +35,14 @@
                     <p>Berikut adalah semua data transaksi yang telah dilakukan &#8594;</p>
                 @endif
             </div>
-            <table class="table w-75 table-striped">
+            <table class="table w-75 table-striped" data-aos="fade-right">
                 <thead>
                     <th>No.</th>
                     <th>Hari/Tanggal</th>
                     <th>Pemasukan</th>
                 </thead>
                 <tbody>
-                    @foreach ($filteredTransactions as $transaction)
+                    @foreach ($dataTransactions as $transaction)
                         <tr>
                             <td>{{ $loop->index + 1 }}.</td>
                             <td>{{ $carbonDate($transaction->created_at) }}
@@ -56,9 +56,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="d-flex justify-content-center mt-5 pagination">{{ $dataTransactions->links() }}</div>
     </div>
     <a href="{{ route('report') }}" class="btn btn-success" style="margin-left: 8em">Kembali</a>
-
     <script>
         function printIncome(url) {
             document.querySelectorAll('.btn-warning').forEach(function(btn) {
@@ -94,7 +94,7 @@
 
         var ctx = document.getElementById('salesChart').getContext('2d');
         var salesChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: {!! json_encode($labels) !!},
                 datasets: [{
@@ -102,18 +102,9 @@
                     data: {!! json_encode($incomeData) !!},
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
+                    borderWidth: 3
                 }]
             },
-            // options: {
-            //     scales: {
-            //         yAxes: [{
-            //             ticks: {
-            //                 beginAtZero: true
-            //             }
-            //         }]
-            //     }
-            // }
         });
 
         function updateChart(labels, data) {

@@ -8,7 +8,7 @@
             @if (Session::has('logout'))
                 <span class="alert alert-success mb-4 d-block">{{ Session::get('logout') }}</span>
             @endif
-            <div class="card d-flex p-0 shadow-sm">
+            <div class="card d-flex p-0 shadow-sm" data-aos="fade-down" data-aos-duration="500">
                 <div class="card-body p-0 d-flex bg-blue-1">
                     <div class="col-5">
                         <img src="{{ asset('images/kuruma.jpg') }}" alt="" class="card-img-top">

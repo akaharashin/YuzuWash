@@ -4,7 +4,7 @@
 
 @section('body')
     <section>
-        <div class="row p-0" data-aos="fade-in">
+        <div class="row p-0" data-aos="fade-in" data-aos-duration="700">
             <div class="col-md-8 p-0">
                 <img src="images/banner.jpg" alt="" class="img-fluid rounded-start" style="max-width: 100%;">
             </div>
@@ -17,19 +17,19 @@
             </div>
         </div>
     </section>
-    <h1 class="text-center mt-4">Paket Satu Kali Cuci YuzuWash</h1>
-    <p class="fs-5 text-center">Bebas Pilih Jenis Layanan Sesuai Keinginan Anda, Urusan Cuci Mobil Biar Kami Yang Kerjakan
+    <h1 class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">Paket Satu Kali Cuci YuzuWash</h1>
+    <p class="fs-5 text-center" data-aos="fade-in" data-aos-duration="3000">Bebas Pilih Jenis Layanan Sesuai Keinginan Anda, Urusan Cuci Mobil Biar Kami Yang Kerjakan
     </p>
     <section>
         <div class="row mx-2 mx-md-5 px-2 px-md-5 mt-4">
             @foreach ($products as $product)
                 <div class="col-md-4">
-                    <div class="card p-3 mb-4 shadow-sm cardbg" data-aos="fade-up">
+                    <div class="card p-3 mb-4 shadow-sm cardbg" data-aos="fade-up" data-aos-duration="1000">
                         <div class="card-body d-flex flex-column">
                             <h4 class="card-title">{{ $product->name }}</h4>
                             <p>{{ $product->desc }}</p>
 
-                            <ul class="list-group mt-4">
+                            <ul class="list-group mt-4" data-aos="fade-in" data-aos-duration="1000">
                                 @foreach (explode(',', $product->services) as $service)
                                     <li class="list-group-item bg-yellow-1">&#128505; {{ trim($service) }}</li>
                                 @endforeach

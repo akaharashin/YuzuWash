@@ -4,7 +4,7 @@
 
 @section('body')
 
-    <div class="row mt-5 pt-5 vh-100">
+    <div class="row mt-5 pt-5 vh-100" data-aos="fade-in" data-aos-duration="1000">
         <div class="col-10 mx-auto">
             <div class="card">
                 <div class="card-body bg-blue-1">

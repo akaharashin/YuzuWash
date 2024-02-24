@@ -18,7 +18,7 @@ class OwnerController extends Controller
 
     function log()
     {
-        $logs = Log::all();
+        $logs = Log::orderBy('created_at' ,'desc')->paginate(10);
         return view('owner.log', compact('logs'));
     }
 
@@ -62,18 +62,27 @@ class OwnerController extends Controller
         $labels = [];
         $incomeData = [];
 
-        // Mengambil transaksi setelah filtering
-        $filteredTransactions = $transactions->orderBy('created_at', 'desc')->get();
+        
 
-        foreach ($filteredTransactions as $transaction) {
-            $labels[] = Carbon::parse($transaction->created_at)->format('d-M-Y');
-            $incomeData[] = $transaction->order->product->price;
+        // Mengambil transaksi setelah filtering
+        $dataTransactions=  $transactions->orderBy('created_at', 'desc')->paginate(10);
+        $filteredTransactions = $transactions->orderBy('created_at', 'asc')->get();
+        $incomeByDate = $filteredTransactions->groupBy(function ($transaction) {
+            return Carbon::parse($transaction->created_at)->format('d-M-Y');
+        });
+        foreach ($incomeByDate as $date => $transactions) {
+            $labels[] = $date;
+            $totalIncomeChart = $transactions->sum(function($transaction){
+                return $transaction->order->product->price;
+            });
+            $incomeData[] = $totalIncomeChart;
         }
+      
 
         $totalCash = $filteredTransactions->sum('cash');
         $totalChange = $filteredTransactions->sum('change');
-        $totalIncome = $totalCash - $totalChange;
+        $totalIncome = $totalCash - $totalChange;   
 
-        return view('owner.income', compact('filteredTransactions', 'totalIncome', 'startDate', 'endDate', 'incomeData', 'labels'));
+        return view('owner.income', compact('filteredTransactions', 'dataTransactions' , 'totalIncome', 'startDate', 'endDate', 'incomeData', 'labels'));
     }
 }

@@ -5,7 +5,7 @@
 @section('body')
     <div class="row mt-5 pt-5">
         <div class="col-md-6 mx-auto">
-            <div class="card p-4 shadow-sm bg-blue-1">
+            <div class="card p-4 shadow-sm bg-blue-1" data-aos="fade-in" data-aos-duration="1000">
                 <h3>Tambah Paket Cuci Baru</h3>
                 <div class="card-body" >
                     <form action="{{ route('add') }}" method="POST" class="d-flex flex-column">

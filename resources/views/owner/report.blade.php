@@ -29,7 +29,7 @@
             @if (Session::has('message'))
                 <span class="alert-success alert mb-5">{{ Session::get('message') }}</span>
             @endif
-            <div class="card p-3 mt-4" style="background-color: #C5E8EF">
+            <div class="card p-3 mt-4" style="background-color: #C5E8EF" data-aos="fade-in" data-aos-duration="1000">
                 <div class="card-body">
                     <!-- Formulir Pencarian -->
                     <form action="{{ route('transactions.search') }}" method="GET" class="mb-3 w-75 text-center">

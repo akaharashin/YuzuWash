@@ -11,7 +11,7 @@
             @if (Session::has('message'))
                 <span class="alert-success alert mb-5 d-block w-50">{{ Session::get('message') }}</span>
             @endif
-            <div class="card">
+            <div class="card" data-aos="fade-in" data-aos-duration="1000">
                 <table class="table table-striped table-info">
                     <tr>
                         <th>Nama Paket</th>

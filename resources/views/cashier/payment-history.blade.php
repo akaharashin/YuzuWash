@@ -19,7 +19,7 @@
     </style>
     <div class="row mt-5 pb-5 mb-5">
         <div class="col-10 mx-auto">
-            <div class="card p-3 bg-blue-1">
+            <div class="card p-3 bg-blue-1" data-aos="fade-in" data-aos-duration="1000">
                 <div class="card-body">
                     <h3 class="">Riwayat Pembayaran</h3>
                     <a href="javascript:void(0);" onclick="printInvoice()" class="btn btn-secondary mt-3">

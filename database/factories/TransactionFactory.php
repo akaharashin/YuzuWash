@@ -17,13 +17,14 @@ class TransactionFactory extends Factory
      */
     public function definition(): array
     {
+        $faker = $this->faker;
         return [
-            'order_id' => $this->faker->numberBetween(1, 12),
+            'order_id' => $faker->numberBetween(1, 12),
             'user_id' => 1,
             'uniqcode' => 'INV-'. Str::random(8),
-            'cash' => $this->faker->randomElement([75000, 125000, 275000,100000, 250000, 300000]),
-            'change' => $this->faker->randomElement([25000, 75000]),
-            'created_at' => $this->faker->dateTimeBetween('2024-01-01', 'now')
+            'cash' => $faker->randomElement([75000, 125000, 275000,100000, 250000, 300000]),
+            'change' => $faker->randomElement([25000, 75000]),
+            'created_at' => $faker->dateTimeBetween('2024-01-01', 'now')
         ];
     }
 }

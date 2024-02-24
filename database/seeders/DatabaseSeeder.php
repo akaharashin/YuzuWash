@@ -66,7 +66,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Order::factory(16)->create();
-        Transaction::factory(12)->create();
+        Transaction::factory(30)->create();
        
     }
 }

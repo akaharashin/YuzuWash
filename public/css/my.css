@@ -17,3 +17,11 @@
 .bg-yellow-1 {
     background-color: #e9c54d
 }
+
+span .inline-flex svg{
+    display: none;
+}
+
+a{
+    text-decoration: none;
+}

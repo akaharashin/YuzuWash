@@ -27,9 +27,9 @@ class OrderFactory extends Factory
         $product = Product::all()->random();
         return [
             'product_id' => $product->id,
-            'customer' => $this->faker->name,
-            'contact' => $this->faker->phoneNumber,
-            'plat' => $this->faker->numerify('F ####'). $this->faker->lexify(' ??'),
+            'customer' => $faker->name,
+            'contact' => $faker->phoneNumber,
+            'plat' => $faker->numerify('F ####'). $faker->lexify(' ??'),
             'status' => 'list',
             'created_at' => $this->faker->dateTimeBetween('2024-01-01', 'now'),
         ];
