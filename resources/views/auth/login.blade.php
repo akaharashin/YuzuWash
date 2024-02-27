@@ -18,11 +18,11 @@
                             @csrf
                             <label class="form-label text-center pb-3"> Nama Pengguna
                                 <input type="text" name="username" class="form-control mt-2" placeholder="Masukan nama pengguna"
-                                    required>
+                                    required autocomplete="none" >
                             </label>
                             <label class="form-label text-center"> Kata Sandi
                                 <input type="password" name="password" class="form-control mt-2" placeholder="Masukan kata sandi"
-                                    required>
+                                    required autocomplete="none" >
                             </label>
                             @if (Session::has('message'))
                                 <span class="text-alert text-danger pb-4">{{ Session::get('message') }}</span>

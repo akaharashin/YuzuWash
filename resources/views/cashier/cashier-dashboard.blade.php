@@ -22,6 +22,7 @@
                     @endif
                     <h6 class="pt-4">Berikut ini adalah pesanan-pesanan yang baru di pesan customer</h6>
                     <p>Klik Konfirmasi order untuk melanjutkan ke pembayaran</p>
+                    <p class="text-danger">Jika anda menolak pesanan, pesanan tersebut akan terhapus dari daftar pesanan</p>
                     <p class="text-success">*Daftar di urutkan dari yang terlebih dahulu memesan</p>
                     <table class="table table-striped mt-3 shadow">
                         <thead>
@@ -46,10 +47,11 @@
                                     <td>{{ $order->product->name }}</td>
                                     <td>Rp{{ number_format($order->product->price, 0, ',', '.') }}</td>
                                     <td>{{ $carbonDateTime($order->created_at) }}.WIB</td>
-                                    <td>
+                                    <td class="d-flex gap-2 py-3">
+                                        <a href="{{ route('deleteOrder', $order->id) }}"
+                                            class="btn btn-danger shadow-sm">Tolak</a>
                                         <a href="{{ route('paymentPage', $order->id) }}"
-                                            class="btn btn-success shadow-sm">Konfirmasi
-                                            Pesanan</a>
+                                            class="btn btn-success shadow-sm">Konfirmasi</a>
                                     </td>
                                 </tr>
                             @empty

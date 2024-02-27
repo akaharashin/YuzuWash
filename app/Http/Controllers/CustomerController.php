@@ -6,6 +6,7 @@ use App\Models\Log;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
@@ -30,20 +31,17 @@ class CustomerController extends Controller
             'plat' => 'required',
         ]);
 
-        // Periksa apakah ada waktu pemesanan terakhir dalam session
-        // if (Session::has('last_order_time')) {
-        //     $lastOrderTime = Session::get('last_order_time');
-        //     $currentTime = now();
+        if (Session::has('last_order_time')) {
+            $lastOrderTime = Session::get('last_order_time');
+            $currentTime = now();
 
-        //     // Periksa apakah telah berlalu 3 menit sejak pemesanan terakhir
-        //     $differenceInMinutes = $currentTime->diffInMinutes($lastOrderTime);
-        //     if ($differenceInMinutes < 3) {
-        //         // Jika belum, kembalikan pesan kesalahan atau alihkan pengguna
-        //         return redirect()->back()->with('error', 'Anda harus menunggu 3 menit sebelum melakukan pemesanan lagi.');
-        //     }
-        // }
+            // Periksa apakah telah berlalu 3 menit sejak pemesanan terakhir
+            $differenceInMinutes = $currentTime->diffInMinutes($lastOrderTime);
+            if ($differenceInMinutes < 3) {
+                return redirect()->back()->with('error', 'Anda harus menunggu 3 menit sebelum melakukan pemesanan lagi.');
+            }
+        }
 
-        // Lanjutkan dengan pemesanan
         $product = Product::find($id);
         Order::create([
             'product_id' => $id,
@@ -58,8 +56,9 @@ class CustomerController extends Controller
             'activity' =>  $request->customer . ' telah melakukan pemesanan paket ' . $product->name
         ]);
 
-        //Simpan waktu pemesanan terakhir dalam session
-        // Session::put('last_order_time', now());
+        //Simpan 
+        Session::put('last_order_time', now());
+
 
         return redirect()->route('orderSuccess');
     }

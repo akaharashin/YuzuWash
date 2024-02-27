@@ -4,10 +4,12 @@
 
 @section('body')
     <canvas id="salesChart" width="400" height="200"></canvas>
+    {{-- <button onclick="printChart()" class="btn btn-secondary">Print Chart</button> --}}
 
     <div class="row mt-5 mb-5 pb-5">
         <div class="col-md-10 mx-auto d-flex">
-            <div class="card w-50 d-inline-block p-3" style="background-color: #C5E8EF" data-aos="fade-in" data-aos-duration="1000">
+            <div class="card w-50 d-inline-block p-3" style="background-color: #C5E8EF" data-aos="fade-in"
+                data-aos-duration="1000">
                 <h5>Filter Sesuai Tanggal</h5>
                 <div class="card-body">
                     <form method="GET" action="{{ route('income') }}">
@@ -30,7 +32,6 @@
                     <p>Berikut data transaksi dari tanggal : <br>{{ $carbonDate($startDate) }} sampai-
                         <br>{{ $carbonDate($endDate) }} &#8594;
                     </p>
-                    
                 @else
                     <p>Berikut adalah semua data transaksi yang telah dilakukan &#8594;</p>
                 @endif
@@ -65,14 +66,11 @@
                 btn.style.display = 'none';
             });
 
-            // Membuat salinan elemen tabel yang ingin dicetak
-            var printContent = document.querySelector('table').cloneNode(true);
+            let printContent = document.querySelector('table').cloneNode(true);
 
-            // Membuat halaman baru untuk mencetak
-            var printWindow = window.open('', '_blank');
+            let printWindow = window.open('', '_blank');
             printWindow.document.open();
 
-            // Menambahkan elemen tabel yang telah disalin ke   halaman baru
             printWindow.document.write(
                 '<html><head><title>Invoice Cuci Mobil</title><style>@media print {table {width: 100%; font-family: sans-serif; font-size: 12pt; border: 1px solid black; padding: 15px } th{border-bottom: 1px solid black;} tr:nth-child(even){background-color: lightblue;}}</style></head><img src="{{ asset('images/yuzu-tr.png') }}" width="75"><h2 style="font-family: sans-serif; display: inline-block; padding-left: 1em;">PT YuzuWash Sukabumi</h2><body>'
             );
@@ -80,12 +78,10 @@
             printWindow.document.write('</body></html>');
             printWindow.document.close();
 
-            // Mencetak halaman baru
             printWindow.print();
             printWindow.onafterprint = function() {
                 printWindow.close();
 
-                // Tampilkan kembali tombol cetak setelah mencetak selesai
                 document.querySelectorAll('.btn-warning').forEach(function(btn) {
                     btn.style.display = 'inline';
                 });
@@ -112,6 +108,23 @@
             salesChart.data.datasets[0].data = data;
             salesChart.update();
         }
+
+        // function printChart() {
+        //     let canvas = document.getElementById('salesChart');
+        //     let img = canvas.toDataURL('image/png');
+
+        //     let printWindow = window.open('');
+        //     printWindow.document.open();
+        //     printWindow.document.write('<img src="' + img + '" />');
+        //     printWindow.document.close();
+
+        //     printWindow.print();
+
+        //     printWindow.onafterprint = () => {
+        //         printWindow.close();
+
+        //     }
+        // }
     </script>
 
 @endsection

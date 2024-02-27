@@ -13,7 +13,7 @@
                     <button type="submit" class="btn btn-danger">Clear Log</button>
                 </form>
             </div>
-            <table class="table table-striped">
+            <table class="table table-striped" data-aos="fade-in" data-aos-duration="1000">
                 <thead>
                     <tr>
                         <th>Oleh</th>

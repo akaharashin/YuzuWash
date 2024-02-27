@@ -9,8 +9,7 @@
 
             @auth
                 @if (auth()->user()->role == 'cashier')
-                    <li class="nav-item"><a href="{{ route('cashierDashboard') }}" class="nav-link text-white">List
-                            Order</a></li>
+                    <li class="nav-item"><a href="{{ route('cashierDashboard') }}" class="nav-link text-white">Daftar Pesanan</a></li>
                     <li class="nav-item" style="margin-right: 4em;"><a href="{{ route('paymentHistory') }}"
                             class="nav-link text-white">Riwayat Pembayaran</a>
                     </li>

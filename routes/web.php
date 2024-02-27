@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     // cashier
     Route::middleware('cashier')->group(function () {
         Route::get('/cashier-dashboard', [TransactionController::class, 'cashierDashboard'])->name('cashierDashboard');
+        Route::get('/delete/{order}', [TransactionController::class, 'deleteOrder'])->name('deleteOrder');
         Route::get('/payment/{order}', [TransactionController::class, 'paymentPage'])->name('paymentPage');
         Route::post('/payment/{order}', [TransactionController::class, 'payment'])->name('payment');
         Route::get('/payment-success/{transaction}', [TransactionController::class, 'paymentSuccess'])->name('paymentSuccess');
@@ -51,7 +52,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/add-cashier', [AdminController::class, 'addCashier'])->name('addCashier');
         Route::get('/edit-cashier/{cashier}', [AdminController::class, 'editCashier'])->name('editCashier');
         Route::post('/update-cashier{cashier}', [AdminController::class, 'updateCashier'])->name('updateCashier');
-        Route::post('/delete-cashier/   {user}', [AdminController::class, 'deleteCashier'])->name('deleteCashier');
+        Route::post('/delete-cashier/{user}', [AdminController::class, 'deleteCashier'])->name('deleteCashier');
         Route::get('/editPage/{product}', [AdminController::class, 'editPage'])->name('editPage');
         Route::post('/update{product}', [AdminController::class, 'update'])->name('update');
         Route::post('/delete/{product}', [AdminController::class, 'delete'])->name('delete');

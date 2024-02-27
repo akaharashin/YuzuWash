@@ -65,6 +65,13 @@ class TransactionController extends Controller
         return view('cashier.payment-history', compact('transactions'));
     }
 
+    function deleteOrder($id) {
+        $order = Order::findOrFail($id);
+        $order->delete();
+
+        return redirect()->route('cashierDashboard')->with('message', 'Pesanan berhasil dihapus');
+    }
+
     public function search(Request $request)
     {
         $search = $request->input('search');

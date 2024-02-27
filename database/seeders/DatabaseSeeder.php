@@ -65,8 +65,8 @@ class DatabaseSeeder extends Seeder
             'estimate' => 3
         ]);
 
-        Order::factory(16)->create();
-        Transaction::factory(70)->create();
+        Order::factory(15)->create();
+        Transaction::factory(30)->create();
        
     }
 }

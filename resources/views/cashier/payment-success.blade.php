@@ -18,7 +18,7 @@
                             <th>Uang Kembalian</th>
                             <th>Kode Pemesanan</th>
                             <th>Tanggal</th>
-                            <th></th> <!-- Kolom kosong untuk menyimpan tombol cetak -->
+                            <th></th> 
                         </tr>
                         <tr>
                             <td>{{ $transaction->order->customer }}</td>
